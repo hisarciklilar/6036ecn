@@ -1,0 +1,219 @@
+[
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction to R",
+    "section": "",
+    "text": "1.1 R, R Studio and Quarto\nR is a very powerful statistical software that is becoming increasingly popular. Being able to do data analysis using R will very likely increase your employability.\nWarning: R is not like other apps that you have used! It requires coding. You will need to attend the seminar sessions and practice regularly. There will be a lot of struggle, but the result is worth it.\nR, as a programming language, is like any other language: the more you use it, the better you will get. Therefore, make sure to attend the lectures & seminars and engage with the module material. Otherwise, you will struggle to catch-up.\nRStudio has four main windows, that often have more than just one purpose. Figure 1.1 provides a brief description of each RStudio window. We will use all of them during the module, but the most important ones will be the console and the editor pane.",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#r-r-studio-and-quarto",
+    "href": "intro.html#r-r-studio-and-quarto",
+    "title": "1  Introduction to R",
+    "section": "",
+    "text": "I list below three apps that you will need to work with this module’s material. I recommend installing these on your computers. Alternatively, you may use Coventry University’s Appsanywhere platform to get access.\nWe will be using R as the statistical analysis tool in this module. For R documentations, support and download links, visit the R Project for Statistical Computing. R is freely available for Linux, MacOS and Windows. Please download the version that matches your computer’s operating system.\nTo facilitate your work with R, I highly recommend to download and install the integrated development environment (IDE) RStudio Desktop from posit. This platform will make it easier for you to write and run R code.\nA final package that I highly recommend you to install is a publishing system, Quarto. You may use Quarto to produce documents in various formats (such as HTML, MS Word, PDF, PowerPoint, etc) while integrating your R code and output. You will easily have the option to change the format of your output as you desire. I will be using Quarto to produce R worksheets for this module. Please visit Quarto for further information and download.\n\nOnce you download Quarto, you will have access to it through RStudio.\n\n\n\n\n\n\n\n\n\nFigure 1.1: RStudio windows and their functions",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#github",
+    "href": "intro.html#github",
+    "title": "1  Introduction to R",
+    "section": "1.2 GitHub",
+    "text": "1.2 GitHub\nOne additional skill that you will gain from this module is the use of GitHub. Github is a platform widely used by developers and data scientists to create, store, manage and share their code publicly. Experience in using GitHub will also give you the competitive edge in your job market applications.\nTo use Github, you will first need to create an account.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#file-organisation",
+    "href": "intro.html#file-organisation",
+    "title": "1  Introduction to R",
+    "section": "1.2 File Organisation",
+    "text": "1.2 File Organisation\n\nCreate a folder for this module. This folder should include all module material you download from Aula or other platforms. Group files in sub-folders in a way that you can locate them easily. So for example, 6036ECN-Further-Econometrics may be the name of the folder and then you may have sub-folders such as Lecture-Slides, R-workshops, etc.\nYou should have one folder for R-workshops. I recommend naming this folder as R-workshops and within that folder, create sub-folders as we progress in the module.\nPlease note that my R-workshops folder is located on my desktop. Hence, I will refer to the folder as ~/Desktop/R-workshops. You will need to modify this depending on where you locate your files.\nIf you are using the computers in the lab, it may be best if you create a folder on your OneDrive account as you can easily access this at home and on-campus.\nBefore working on the data, set your working directory. R will save all files in there and, if you want to open a dataset, R will also look in there first. Select the folder you have created for R workshops.\nUse setwd(the_address_you_would_like_to_locate_your_work) in the console to choose your work directory. You may alternatively do this through the menu:\n\nSession –&gt; Set Working Directory –&gt; Choose Directory\nYou will see the console printing this action, which may help you to remember how to use the console next time.\n\nIf you are unsure of in which folder your work is, type getwd() in the console and R will print the current location you are at.",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R-workshops",
+    "section": "",
+    "text": "Welcome!\nThis workbook is created for the seminar sessions of\n6036ECN Further Econometrics module.\nIt is written using Quarto on RStudio by\nMehtap Hisarciklilar",
+    "crumbs": [
+      "Welcome!"
+    ]
+  },
+  {
+    "objectID": "basics-of-R.html",
+    "href": "basics-of-R.html",
+    "title": "2  Basics of R",
+    "section": "",
+    "text": "2.1 Using R as a calculator\nYou may use R as a calculator. Some examples are given below.\n# Addition\n5 + 4\n\n[1] 9\n# Subtraction\n5 - 4\n\n[1] 1\n# Multiplication\n3 * 6\n\n[1] 18\n# Division\n10 / 2\n\n[1] 5\n# Exponents\n2^3\n\n[1] 8\n# Modulo\n5 %% 2\n\n[1] 1",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Basics of R</span>"
+    ]
+  },
+  {
+    "objectID": "basics-of-R.html#using-r-as-a-calculator",
+    "href": "basics-of-R.html#using-r-as-a-calculator",
+    "title": "2  Basics of R",
+    "section": "",
+    "text": "2.1.1 Basic Operators\n\n\n\nOperator\nDescription\n\n\n\n\nArithmetic\n\n\n\n+\nAddition\n\n\n-\nSubtraction\n\n\n*\nMultiplication\n\n\n/\nDivision\n\n\n^ or **\nExponential\n\n\n%%\nModulus\n\n\n% / %\nInteger Division\n\n\nLogic\n\n\n\n&lt;\nLess than\n\n\n&lt;=\nLess than or equal to\n\n\n&gt;\nGreater than\n\n\n&gt;=\nGreater than or equal to\n\n\n==\nExactly equal to\n\n\n!=\nNot equal to\n\n\n!x\nNot x\n\n\nx | y\nx OR y\n\n\nx & y\nx AND y\n\n\n\n\n\n2.1.2 Order of operators\n\nParenthesis\nMultiplication / division\nAddition / subtraction\nMultiplication has the same importance as division. Similarly, addition and subtraction are at the same level. When we need to decide between the two, we apply the operation that shows first from the left to the right.\nUse of parentheses makes it easier to perform the correct operation\nCan you guess the result of the following operation?\n\n8 / 2 * ( 2 + 2)\n\n\n\n8 / 2 * ( 2 + 2)\n\n[1] 16\n\n\n\n8 / 2 * 2 + 2\n\n[1] 10\n\n\n\n100 * 2 + 50 / 2\n\n[1] 225\n\n\n\n(100 * 2) + (50 / 2)\n\n[1] 225",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Basics of R</span>"
+    ]
+  },
+  {
+    "objectID": "basics-of-R.html#storing-information-in-objects",
+    "href": "basics-of-R.html#storing-information-in-objects",
+    "title": "2  Basics of R",
+    "section": "2.2 Storing information in objects",
+    "text": "2.2 Storing information in objects\nR lets you save data by storing it inside an R object. An object is a name that you can use to call up stored data.\n\na &lt;- 5\n\na\n\n[1] 5\n\n\n\na + 2\n\n[1] 7\n\n\nIn the example above, we store value of 5 under object a. We then call the value stored under a and sum it with 2.\nNote the use of &lt; together with - . This representation (&lt;-) resembles a backward pointing arrow, and it assigns the value 2 to the object a.\n\nb_vector &lt;- 1:6\nb_vector\n\n[1] 1 2 3 4 5 6\n\n## [1] 1 2 3 4 5 6\n\nIn the above example, we create a vector, whose elements are numbers from 1 to 6 and store it under b_vector.\nWhen you create an object, the object will appear in the environment pane of RStudio (on the top right-hand-side of the R screen). This pane will show you all of the objects you’ve created since opening RStudio.\n\n2.2.1 Naming of objects\nNote the following;\n\nAn object name cannot start with a number (for example, 2var or 2_var)\nA name cannot use some special symbols, like ^, !, $, @, +, -, /, or * . You may use _\nR is case-sensitive, so name and Name will refer to different objects\nR will overwrite any previous information stored in an object without asking your confirmation. So, be careful while making changes.\nYou can see which object names you have already used by calling the function ls:\n\nls()\n\n[1] \"a\"        \"b_vector\"\n\n## [1] \"a\"        \"b_vector\"\n\n\n\n\n2.2.2 Naming conventions\nYou may see the following styles for naming of variables:\n\nCamel case\n\nCamel case variable naming is common in Javascipt. However, it is considered as bad practise in R. Try to avoid this kind of naming.\n\nbankAccount = 100\n\n\nUse of dots\n\ndot is used in variable names by many R users. However, try to avoid this too because base R uses dots in function names (contrib.url()) and class names (data.frame). Avoiding dot in your variable names will help you avoid confusion, particularly in the initial stages of your learning!\n\nbank.account = 100\n\n\nSnake case\n\nUse of snake case is considered to be good practice. Try to follow this approach.\n\nbank_account = 100\n\nNote that you may find different users of R having a preference towards different styles. The recommendations above are from the “Tidyverse style guide”, which is available from https://style.tidyverse.org.\nStart your variable names with a lower case and reserve the capital letter start for function names!\n\n\n2.2.3 Removing objects\nYou will see that the Environment window can quickly get over-crowded while working interactively. You may remove the objects that you no longer need. by rm(object_name )\n\nrm(a)\n\n\n\n2.2.4 Example of using variables\nLet us calculate the module mark for a student who got 65% from coursework and 53% from exam. The weights for the coursework and exam are, respectively, 25% and 75%.\n\n# let's calculate module mark for a student\ncoursework &lt;- 65\nexam &lt;- 53\nmodule_mark &lt;- coursework * 0.25 + exam * 0.75\n\nprint(module_mark)\n\n[1] 56",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Basics of R</span>"
+    ]
+  },
+  {
+    "objectID": "basics-of-R.html#datatypes-in-r",
+    "href": "basics-of-R.html#datatypes-in-r",
+    "title": "2  Basics of R",
+    "section": "2.3 Datatypes in R",
+    "text": "2.3 Datatypes in R\n\n2.3.1 Numeric\nDecimal numbers and integers are part of the numeric class in R.\n\n2.3.1.1 Decimal (floating point values)\n\ndecimal_number &lt;- 2.2\n\n\n\n2.3.1.2 Integer\n\ni &lt;- 5\n\n\n\n\n2.3.2 Logical\nBoolean values (TRUE and FALSE) are part of the logical class in R. These are written in capital letters.\n\nt &lt;- TRUE\nf &lt;- FALSE\n\n\nt\n\n[1] TRUE\n\n\n\nf\n\n[1] FALSE\n\n\n\n\n2.3.3 Characters\nText (string) values are known as characters in R. You may use single or double quotation to create a text (string).\n\nmessage &lt;- \"hello all!\"\nprint(message)\n\n[1] \"hello all!\"\n\n\n\nan_other_message &lt;- 'how are you?'\nprint(an_other_message)\n\n[1] \"how are you?\"\n\n\n\n\n2.3.4 Checking data type classes\nWe can use the class() function to check the data type of a variable:\n\nclass(decimal_number)\n\n[1] \"numeric\"\n\n\n\nclass(i)\n\n[1] \"numeric\"\n\n\n\nclass(t)\n\n[1] \"logical\"\n\n\n\nclass(f)\n\n[1] \"logical\"\n\n\n\nclass(message)\n\n[1] \"character\"",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Basics of R</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#getting-help",
+    "href": "intro.html#getting-help",
+    "title": "1  Introduction to R",
+    "section": "1.3 Getting Help",
+    "text": "1.3 Getting Help\nIf you should ever struggle with some of R’s commands, a look into R’s help-files can be very helpful. To access the help file, you have to type into the console window ? and then the command name. For example, if you want to know more about the command getwd(), type the following:\n\n?getwd()",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to R</span>"
+    ]
+  },
+  {
+    "objectID": "data-management-in-R.html",
+    "href": "data-management-in-R.html",
+    "title": "3  Data Management in R",
+    "section": "",
+    "text": "3.1 Packages and libraries\nIn order to access specialised data analysis tools in R, we will need to install some R packages.\n“An R package is a collection of functions, data, and documentation that extends the capabilities of base R. Using packages is key to the successful use of R.” (Wickham, Cetinkaya-Rundel, and Grolemund, n.d.)\nWe will start by installing the tidyverse package\n#install.packages(\"tidyverse\")\nTo install tidyverse, type the above line of code in the console, and then press enter to run it. R will download the packages from CRAN and install them on to your computer.\nOnce installed, you may use this package after loading it with the library() function.\n#library(tidyverse)\nYou see above a list of packages that come with tidyverse.\nYou may update tidyverse by running\n#tidyverse_update()",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Management in R</span>"
+    ]
+  },
+  {
+    "objectID": "data-management-in-R.html#functions",
+    "href": "data-management-in-R.html#functions",
+    "title": "3  Data Management in R",
+    "section": "3.2 Functions",
+    "text": "3.2 Functions\nYou may identify functions with the () after the function name. For example, ls() that we used above.\nFunctions may also take arguments. The data that we pass into the function is called the function’s argument. The argument can be raw data, an R object, or even the results of another R function.\n\n# round a number\nround(4.5218)\n\n[1] 5\n\n## 5\n\n# calculate the factorial\nfactorial(3)\n\n[1] 6\n\n## 6\n\n# calculate the mean of values from 1 to 6:\nmean(1:6)\n\n[1] 3.5\n\n## 3.5\n\nround(mean(1:6))\n\n[1] 4\n\n## 4\n\nMany R functions take multiple arguments that help them do their job. You can give a function as many arguments as you like as long as you separate each argument with a comma.\nTo see which arguments a function can take, you may type args in parenthesis after function name:\n\nargs(round)\n\nfunction (x, digits = 0, ...) \nNULL\n\n## function (x, digits = 0) \n## NULL\n\nround(3.1415, digits = 2)\n\n[1] 3.14\n\n## 3.14\n\n\n3.2.1 Basic Functions\n\n\n\n\n\n\n\nFunction\nDescription\n\n\n\n\n?() or help()\nAccess the documentation and help file for a particular function\n\n\ninstall.packages()\nDownload and install an R package\n\n\nlibrary()\nLoads an R package into the working environment\n\n\nsetwd()\nSet the working directory\n\n\ngetwd()\nGet the working directory\n\n\nc()\nCreate a vector\n\n\nas.numeric()\nConverts an object to a numeric vector\n\n\nas.logical()\nConverts an object to a logical vector\n\n\nas.character()\nConverts and object to a character vector\n\n\nmode()\nReturns the type of the object\n\n\nsum()\nReturns the sum of all input values\n\n\nlength()\nReturns the lenght of the obejct\n\n\nmean()\nReturns the arithmetic mean of the vector\n\n\nmedian()\nReturns the median of the vector\n\n\nsample()\nReturns a specificed size of elements from the object\n\n\nreplicate()\nRepeats an expression a specific number of times\n\n\nhist()\nCreates a histogram of given data values",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Management in R</span>"
+    ]
+  },
+  {
+    "objectID": "data-management-in-R.html#scripts",
+    "href": "data-management-in-R.html#scripts",
+    "title": "3  Data Management in R",
+    "section": "3.3 Scripts",
+    "text": "3.3 Scripts\nYou can create a draft of your code as you go by using an R script. An R script is just a plain text file that you save R code in. You can open an R script in RStudio using the menu bar:\nFile –&gt; New File –&gt; R Script\nWe will write and edit R code in a script. This will help create a reproducible record of your work. When you’re finished for the day, you can save your script and then use it to rerun your entire analysis the next day.\nTo save a script, click the scripts pane, and then go to File –&gt; Save As in the menu bar.\n\nYou can automatically execute a line of code in a script by clicking the Run button on the top right of the pane. R will run whichever line of code your cursor is on.\nIf you have a whole section highlighted, R will run the highlighted code.\nYou can run the entire script by clicking the Source button.\nYou can use Control + Return in your keyboard as a shortcut for the Run button. On Macs, that would be Command + Return.\n\n\n\n\n\nWickham, Hadley, Mine Cetinkaya-Rundel, and Garrett Grolemund. n.d. R for Data Science. 2nd edition. O’Reilly. https://r4ds.hadley.nz/preface-2e.",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Management in R</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Riegler, Robert. 2022. “R Workbook - Guidance for\nWorksheets.” Aston University.\n\n\nWickham, Hadley, Mine Cetinkaya-Rundel, and Garrett Grolemund. n.d.\nR for Data Science. 2nd edition. O’Reilly. https://r4ds.hadley.nz/preface-2e.",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "References"
+    ]
+  },
+  {
+    "objectID": "importing-data-into-R.html",
+    "href": "importing-data-into-R.html",
+    "title": "4  Importing Data into R",
+    "section": "",
+    "text": "4.1 Example: Crimes data\nThe example and instructions provided in this section is taken from (Riegler 2022).\nThe following exercise gives you a hands-on introduction to basic operations in R using a real-world data set. It begins with importing a MS-Excel data set into R and asks you to perform some basic operations to familiarise yourself with some of the commands that will be relevant for the coursework and in subsequent computer classes.\nPlease download the Excel data set called crime.xls from Aula and save it into a drive of your choice. This is a data set that contains crime levels and other socio-economic information on 46 cities across the US for the year 1982. The full version of the data set can be accessed at http://fmwww.bc.edu/ec-p/data/wooldridge/datasets.list.html. The variables are defined as follows:\nFrom here on, you need to open a R script to save all your commands to be able to replicate your results:",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Importing Data into R</span>"
+    ]
+  },
+  {
+    "objectID": "importing-data-into-R.html#using-r-as-a-calculator",
+    "href": "importing-data-into-R.html#using-r-as-a-calculator",
+    "title": "4  Importing Data into R",
+    "section": "",
+    "text": "4.1.1 Basic Operators\n\n\n\nOperator\nDescription\n\n\n\n\nArithmetic\n\n\n\n+\nAddition\n\n\n-\nSubtraction\n\n\n*\nMultiplication\n\n\n/\nDivision\n\n\n^ or **\nExponential\n\n\n%%\nModulus\n\n\n% / %\nInteger Division\n\n\nLogic\n\n\n\n&lt;\nLess than\n\n\n&lt;=\nLess than or equal to\n\n\n&gt;\nGreater than\n\n\n&gt;=\nGreater than or equal to\n\n\n==\nExactly equal to\n\n\n!=\nNot equal to\n\n\n!x\nNot x\n\n\nx | y\nx OR y\n\n\nx & y\nx AND y\n\n\n\n\n\n4.1.2 Order of operators\n\nParenthesis\nMultiplication / division\nAddition / subtraction\nMultiplication has the same importance as division. Similarly, addition and subtraction are at the same level. When we need to decide between the two, we apply the operation that shows first from the left to the right.\nUse of parentheses makes it easier to perform the correct operation\nCan you guess the result of the following operation?\n\n8 / 2 * ( 2 + 2)\n\n\n\n8 / 2 * ( 2 + 2)\n\n[1] 16\n\n\n\n8 / 2 * 2 + 2\n\n[1] 10\n\n\n\n100 * 2 + 50 / 2\n\n[1] 225\n\n\n\n(100 * 2) + (50 / 2)\n\n[1] 225",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Importing Data into R</span>"
+    ]
+  },
+  {
+    "objectID": "importing-data-into-R.html#storing-information-in-objects",
+    "href": "importing-data-into-R.html#storing-information-in-objects",
+    "title": "4  Importing Data into R",
+    "section": "4.2 Storing information in objects",
+    "text": "4.2 Storing information in objects\nR lets you save data by storing it inside an R object. An object is a name that you can use to call up stored data.\n\na &lt;- 5\n\na\n\n[1] 5\n\n\n\na + 2\n\n[1] 7\n\n\nIn the example above, we store value of 5 under object a. We then call the value stored under a and sum it with 2.\nNote the use of &lt; together with - . This representation (&lt;-) resembles a backward pointing arrow, and it assigns the value 2 to the object a.\n\nb_vector &lt;- 1:6\nb_vector\n\n[1] 1 2 3 4 5 6\n\n## [1] 1 2 3 4 5 6\n\nIn the above example, we create a vector, whose elements are numbers from 1 to 6 and store it under b_vector.\nWhen you create an object, the object will appear in the environment pane of RStudio (on the top right-hand-side of the R screen). This pane will show you all of the objects you’ve created since opening RStudio.\n\n4.2.1 Naming of objects\nNote the following;\n\nAn object name cannot start with a number (for example, 2var or 2_var)\nA name cannot use some special symbols, like ^, !, $, @, +, -, /, or * . You may use _\nR is case-sensitive, so name and Name will refer to different objects\nR will overwrite any previous information stored in an object without asking your confirmation. So, be careful while making changes.\nYou can see which object names you have already used by calling the function ls:\n\nls()\n\n[1] \"a\"        \"b_vector\"\n\n## [1] \"a\"        \"b_vector\"\n\n\n\n\n4.2.2 Naming conventions\nYou may see the following styles for naming of variables:\n\nCamel case\n\nCamel case variable naming is common in Javascipt. However, it is considered as bad practise in R. Try to avoid this kind of naming.\n\nbankAccount = 100\n\n\nUse of dots\n\ndot is used in variable names by many R users. However, try to avoid this too because base R uses dots in function names (contrib.url()) and class names (data.frame). Avoiding dot in your variable names will help you avoid confusion, particularly in the initial stages of your learning!\n\nbank.account = 100\n\n\nSnake case\n\nUse of snake case is considered to be good practice. Try to follow this approach.\n\nbank_account = 100\n\nNote that you may find different users of R having a preference towards different styles. The recommendations above are from the “Tidyverse style guide”, which is available from https://style.tidyverse.org.\nStart your variable names with a lower case and reserve the capital letter start for function names!\n\n\n4.2.3 Removing objects\nYou will see that the Environment window can quickly get over-crowded while working interactively. You may remove the objects that you no longer need. by rm(object_name )\n\nrm(a)\n\n\n\n4.2.4 Example of using variables\nLet us calculate the module mark for a student who got 65% from coursework and 53% from exam. The weights for the coursework and exam are, respectively, 25% and 75%.\n\n# let's calculate module mark for a student\ncoursework &lt;- 65\nexam &lt;- 53\nmodule_mark &lt;- coursework * 0.25 + exam * 0.75\n\nprint(module_mark)\n\n[1] 56",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Importing Data into R</span>"
+    ]
+  },
+  {
+    "objectID": "importing-data-into-R.html#datatypes-in-r",
+    "href": "importing-data-into-R.html#datatypes-in-r",
+    "title": "4  Importing Data into R",
+    "section": "4.3 Datatypes in R",
+    "text": "4.3 Datatypes in R\n\n4.3.1 Numeric\nDecimal numbers and integers are part of the numeric class in R.\n\n4.3.1.1 Decimal (floating point values)\n\ndecimal_number &lt;- 2.2\n\n\n\n4.3.1.2 Integer\n\ni &lt;- 5\n\n\n\n\n4.3.2 Logical\nBoolean values (TRUE and FALSE) are part of the logical class in R. These are written in capital letters.\n\nt &lt;- TRUE\nf &lt;- FALSE\n\n\nt\n\n[1] TRUE\n\n\n\nf\n\n[1] FALSE\n\n\n\n\n4.3.3 Characters\nText (string) values are known as characters in R. You may use single or double quotation to create a text (string).\n\nmessage &lt;- \"hello all!\"\nprint(message)\n\n[1] \"hello all!\"\n\n\n\nan_other_message &lt;- 'how are you?'\nprint(an_other_message)\n\n[1] \"how are you?\"\n\n\n\n\n4.3.4 Checking data type classes\nWe can use the class() function to check the data type of a variable:\n\nclass(decimal_number)\n\n[1] \"numeric\"\n\n\n\nclass(i)\n\n[1] \"numeric\"\n\n\n\nclass(t)\n\n[1] \"logical\"\n\n\n\nclass(f)\n\n[1] \"logical\"\n\n\n\nclass(message)\n\n[1] \"character\"\n\n\n\n\n\n\nRiegler, Robert. 2022. “R Workbook - Guidance for Worksheets.” Aston University.",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Importing Data into R</span>"
+    ]
+  },
+  {
+    "objectID": "importing-data-into-R.html#example-crimes-data",
+    "href": "importing-data-into-R.html#example-crimes-data",
+    "title": "4  Importing Data into R",
+    "section": "",
+    "text": "Variable\nDefinition\n\n\n\n\npop\nactual population in number\n\n\ncrimes\ntotal number of crimes\n\n\nunem\nunemployment rate (%)\n\n\nofficers\nnumber of police officers\n\n\npcinc\nper capita income, $\n\n\narea\nland area, square miles\n\n\nlawexpc\nlaw enforcement expenditure per capita, $\n\n\n\n\n\n4.1.1 Task 1\n\n4.1.1.1 Task\nImport the Excel data set into R.\n\n\n4.1.1.2 Guidance\nThe native data format of R is .Rdata, however, you can also open other formats, such as .xlsx, .csv, etc. Non-native data formats have to be imported rather than just opened. Before we can we can import Excel spreadsheets directly into R, we have to activate a R-library first.\nYou can either use the package manager window (in the right bottom corner of the R screen) and tick the box next to the package name or you type the following into the terminal window (in the left bottom of the R screen)\n\nlibrary(readxl)\n\nThis line loads the necessary readxl library. But you will probably receive an error message when you run the above line. This is because we first need to install the read_excel package. (Note that you will need to type the below line without the pound (hashtag) sign at the beginning of the line).\n\n# install.packages(\"read_excel\")\nlibrary(readxl)\n\nThere are two ways to import:\n\nThrough command line:\n\ncrime &lt;- read_excel(\"./assets/data/crime.xls\")\n\nIn the above line, we import the dataset with the read_excel function and store it under the name crime. Notice how the new crime data is added as an object in the R environment.\nThrough menu:\nFile –&gt; Import Dataset –&gt; From Excel\n\nDon’t forget to tick the “First Row as Names” box if it is not ticked!\n\n\n\n4.1.2 Task 2\n\n4.1.2.1 Task\nView the dataset in R’s data viewer.\n\n\n4.1.2.2 Guidance\nTo open the data viewer, use the View function.\n\n# View(crime)\n\nNote that the first letter of View is capitalised.\n\n\n\n4.1.3 Task 3\n\n4.1.3.1 Task\nView the first few (six) entries of the crime data to get a feeling of what the values look like.\n\n\n4.1.3.2 Guidance\nUse the head function\n\nhead(crime)\n\n# A tibble: 6 × 7\n     pop crimes  unem officers pcinc  area lawexpc\n   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;\n1 229528  17136  8.20      326  8532  44.6    851.\n2 814054  75654  8.10     1621  7551 375      875.\n3 374974  31352  9         633  8343  49.8   1122.\n4 176496  15698 12.6       245  7592  74      744.\n5 288446  31202 12.6       504  7558  97.3    974.\n6 122768  16806 13.9       186  6411  55.3    762.\n\n\n\n\n\n4.1.4 Task 4\n\n4.1.4.1 Task\nLabel the variables using the definitions given above.\n\n\n4.1.4.2 Guidance\nYou have to attach a variable label to each variable. There is already a library available which facilitates the allocation of lables to variables. First, we need to install the package!\n\n# install.packages(\"expss\")\nlibrary(expss)\n\nLoading required package: maditr\n\n\n\nTo get total summary skip 'by' argument: take_all(mtcars, mean)\n\n\n\nUse 'expss_output_rnotebook()' to display tables inside R Notebooks.\n To return to the console output, use 'expss_output_default()'.\n\ncrime &lt;- apply_labels(crime, \n                      pop = \"actual population in number\",\n                      crimes = \"total number of crimes\",\n                      unem = \"unemployment rate (%)\", \n                      officers = \"number of police officers\", \n                      pcinc = \"per capita income, $\",\n                      area = \"land area, square miles\", \n                      lawexpc = \"law enforcement expenditure per capita, $\"\n                      )\n\n\n\n\n4.1.5 Task 5\n\n4.1.5.1 Task\nCreate a new variable which measures the population density for each city.\n\n\n4.1.5.2 Guidance\nTo generate a new variable and add it to the existing crime dataset, we use the following command:\n\ncrime$popdens &lt;- crime$pop / crime$area\n\nYou may wonder why we add crime$ in front of every variable. The reason is that R can store more than one data frame, matrix, list, vector etc., at the same time, so the prefix crime$ is necessary to avoid ambiguity and ensure that we are working with variables in the crime data. Think of crime$ as an address where e.g. the variable pop stays. If you have loaded another data frame that contains a pop variable, R would know that we want to use the variable from the crime dataset and not from the other data frame. There are library packages that can facilitate the process, however, we will cover them later in the module.\nNote that the newly created population density variable is now labelled as the original population variable (pop). Let’s update the label with the method we introduced in Task 4. Note that we do not need to call the library again, as it is already called.\n\ncrime &lt;- apply_labels(crime, \n                      popdens = \"population density: pop / area\")\n\n\n\n\n4.1.6 Task 6\n\n4.1.6.1 Task\nSort the data with respect to the population density of each city.\n\n\n4.1.6.2 Guidance\nSorting data is a useful action to get a general feeling for the data, e.g. are there any outliers in the dataset? Are there any unusual patterns?\nTo change the order of the rows in a data frame, we will apply the order function. We first rank all observations with respect to the population density and store this information in a vector called rank. The rank vector contains indices that we can use to sort the crime data frame. Below, we save the sorted data under a new name, crime.popdens1\n\nrank &lt;- order(crime$popdens)\ncrime.popdens1 &lt;- crime[rank,]\n\nLet’s see the result (note. how the population density variable is now sorted from the smallest to the largest):\n\nhead(crime.popdens1)\n\n# A tibble: 6 × 8\n  pop        crimes     unem       officers   pcinc      area  lawexpc popdens  \n  &lt;labelled&gt; &lt;labelled&gt; &lt;labelled&gt; &lt;labelled&gt; &lt;labelled&gt; &lt;lab&gt; &lt;label&gt; &lt;labelle&gt;\n1 425093     38195       4.7        767       7991       604.0  570.00  703.7964\n2 268887     14537       5.5        400       7704       255.9  570.63 1050.7503\n3 462657     34736      10.4        937       7585       352.0  582.56 1314.3665\n4 451397     45503      10.4       1145       7480       316.4 1054.17 1426.6656\n5 412661     47128       8.3        719       7336       258.5  554.70 1596.3675\n6 173630     18915       8.7        366       7409       100.5  827.16 1727.6617\n\n# you may alternatively use \n# View(crime.popdens1)\n\nThis procedure sorts the data from the smallest to the largest value. To sort the data from the largest to the smallest number, we set the order argument decreasing to TRUE.\n\ncrime.popdens2 &lt;- crime[order(crime$popdens, decreasing = TRUE),]\nhead(crime.popdens2)\n\n# A tibble: 6 × 8\n  pop        crimes     unem       officers   pcinc      area  lawexpc popdens  \n  &lt;labelled&gt; &lt;labelled&gt; &lt;labelled&gt; &lt;labelled&gt; &lt;labelled&gt; &lt;lab&gt; &lt;label&gt; &lt;labelle&gt;\n1  708287     68598      8.4       1971       9265        46.4 1050.00 15264.806\n2  334414     36172     15.4       1166       4525        24.1 1139.32 13876.099\n3  365506     52901     12.3        979       6084        34.3  714.00 10656.152\n4 1181868    152962     20.3       4092       6251       135.6 1483.52  8715.840\n5  360493     28592     16.9       1034       5929        41.8  749.44  8624.235\n6  158533     15233     11.3        408       6169        18.9  661.50  8387.990\n\n\nHave you observed a slight difference in the way we sorted the data? We can save some time and space by merging the two steps into one line, however, it is sometimes easier to understand a command if it is split into separate stages.\n\n\n\n4.1.7 Task 7\n\n4.1.7.1 Task\nWhat is the minimum and maximum value for population density in the crime data?\n\n\n4.1.7.2 Guidance\nThe minimum and maximum values can be produced by generating standard descriptive statistics of the variables.\n\nsummary(crime$popdens)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  703.8  2797.1  4236.8  4967.5  7052.2 15264.8 \n\n\nBefore you finish, save the dataset under a new name. Never overwrite your original data!\n\nsave(crime, file = \"./assets/data/crime_v2.Rdata\")\n\nThe above command tells R to use the crime dataset and save it as crime_v2.Rdata. Rdata is an R specific format. R can also save data in .csv format, that can be opened with any text editor or spreadsheet software:\n\nwrite.csv(crime, file = \"./assets/data/crime_v2.csv\", row.names = TRUE) \n\nNow you are ready to answer the following questions on your own:\n\n\n\n4.1.8 Further Exercises\n\nFind the minimum and maximum number of police officers in the data set.\nCreate a new variable which measures the crime rate per 1,000 of population.\nIs the city with the highest number of police officers also the city with the highest crime density?\nHow many crimes occurred in the richest city?\nIs the richest city also the one with the highest number of police officers?\nWhat is the average unemployment rate across these 46 U.S. cities?\nDoes the city with the highest unemployment rate also have the highest crime level?\n\n\n\n\n\nRiegler, Robert. 2022. “R Workbook - Guidance for Worksheets.” Aston University.",
+    "crumbs": [
+      "Seminar 1 (21 January 2025)",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Importing Data into R</span>"
+    ]
+  }
+]
