@@ -84,7 +84,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./introduction-to-regression-analysis.html" rel="next">
 <link href="./data-management-in-R.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -135,7 +135,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Seminar 1 (21 January 2025)</a></li><li class="breadcrumb-item"><a href="./importing-data-into-R.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data into R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-management-in-R.html">Seminar 2 (28 January 2025)</a></li><li class="breadcrumb-item"><a href="./importing-data-into-R.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data into R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -187,6 +187,17 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Basics of R</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar 2 (28 January 2025)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data-management-in-R.html" class="sidebar-item-text sidebar-link">
@@ -197,6 +208,12 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="./importing-data-into-R.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data into R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction-to-regression-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -217,7 +234,7 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#example-crimes-data" id="toc-example-crimes-data" class="nav-link active" data-scroll-target="#example-crimes-data"><span class="header-section-number">4.1</span> Example: Crimes data</a>
+  <li><a href="#example-1-crime-data" id="toc-example-1-crime-data" class="nav-link active" data-scroll-target="#example-1-crime-data"><span class="header-section-number">4.1</span> Example 1: Crime data</a>
   <ul class="collapse">
   <li><a href="#task-1" id="toc-task-1" class="nav-link" data-scroll-target="#task-1"><span class="header-section-number">4.1.1</span> Task 1</a></li>
   <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2"><span class="header-section-number">4.1.2</span> Task 2</a></li>
@@ -234,7 +251,7 @@ div.csl-indent {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Seminar 1 (21 January 2025)</a></li><li class="breadcrumb-item"><a href="./importing-data-into-R.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data into R</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-management-in-R.html">Seminar 2 (28 January 2025)</a></li><li class="breadcrumb-item"><a href="./importing-data-into-R.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data into R</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data into R</span></h1>
 </div>
@@ -253,8 +270,8 @@ div.csl-indent {
 </header>
 
 
-<section id="example-crimes-data" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="example-crimes-data"><span class="header-section-number">4.1</span> Example: Crimes data</h2>
+<section id="example-1-crime-data" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="example-1-crime-data"><span class="header-section-number">4.1</span> Example 1: Crime data</h2>
 <p>The example and instructions provided in this section is taken from <span class="citation" data-cites="riegler22">(<a href="references.html#ref-riegler22" role="doc-biblioref">Riegler 2022</a>)</span>.</p>
 <p>The following exercise gives you a hands-on introduction to basic operations in R using a real-world data set. It begins with importing a MS-Excel data set into R and asks you to perform some basic operations to familiarise yourself with some of the commands that will be relevant for the coursework and in subsequent computer classes.</p>
 <p>Please download the Excel data set called <code>crime.xls</code> from Aula and save it into a drive of your choice. This is a data set that contains crime levels and other socio-economic information on 46 cities across the US for the year 1982. The full version of the data set can be accessed at <a href="http://fmwww.bc.edu/ec-p/data/wooldridge/datasets.list.html" class="uri">http://fmwww.bc.edu/ec-p/data/wooldridge/datasets.list.html</a>. The variables are defined as follows:</p>
@@ -312,7 +329,7 @@ div.csl-indent {
 </div>
 <p>This line loads the necessary <code>readxl</code> library. But you will probably receive an error message when you run the above line. This is because we first need to install the <code>read_excel</code> package. (Note that you will need to type the below line without the pound (hashtag) sign at the beginning of the line).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("read_excel")</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("readxl")</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are two ways to import:</p>
@@ -376,7 +393,7 @@ div.csl-indent {
 </section>
 <section id="guidance-3" class="level4" data-number="4.1.4.2">
 <h4 data-number="4.1.4.2" class="anchored" data-anchor-id="guidance-3"><span class="header-section-number">4.1.4.2</span> Guidance</h4>
-<p>You have to attach a variable label to each variable. There is already a library available which facilitates the allocation of lables to variables. First, we need to install the package!</p>
+<p>You have to attach a variable label to each variable. There is already a library available which facilitates the allocation of labels to variables. First, we need to install the package!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("expss")</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(expss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -385,22 +402,17 @@ div.csl-indent {
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
-To get total summary skip 'by' argument: take_all(mtcars, mean)</code></pre>
+To select rows from data: rows(mtcars, am==0)</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Use 'expss_output_rnotebook()' to display tables inside R Notebooks.
- To return to the console output, use 'expss_output_default()'.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>crime <span class="ot">&lt;-</span> <span class="fu">apply_labels</span>(crime, </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">pop =</span> <span class="st">"actual population in number"</span>,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">crimes =</span> <span class="st">"total number of crimes"</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">unem =</span> <span class="st">"unemployment rate (%)"</span>, </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">officers =</span> <span class="st">"number of police officers"</span>, </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">pcinc =</span> <span class="st">"per capita income, $"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">area =</span> <span class="st">"land area, square miles"</span>, </span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">lawexpc =</span> <span class="st">"law enforcement expenditure per capita, $"</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>crime <span class="ot">&lt;-</span> <span class="fu">apply_labels</span>(crime, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">pop =</span> <span class="st">"actual population in number"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">crimes =</span> <span class="st">"total number of crimes"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">unem =</span> <span class="st">"unemployment rate (%)"</span>, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">officers =</span> <span class="st">"number of police officers"</span>, </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">pcinc =</span> <span class="st">"per capita income, $"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">area =</span> <span class="st">"land area, square miles"</span>, </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">lawexpc =</span> <span class="st">"law enforcement expenditure per capita, $"</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -414,13 +426,13 @@ Use 'expss_output_rnotebook()' to display tables inside R Notebooks.
 <h4 data-number="4.1.5.2" class="anchored" data-anchor-id="guidance-4"><span class="header-section-number">4.1.5.2</span> Guidance</h4>
 <p>To generate a new variable and add it to the existing crime dataset, we use the following command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>crime<span class="sc">$</span>popdens <span class="ot">&lt;-</span> crime<span class="sc">$</span>pop <span class="sc">/</span> crime<span class="sc">$</span>area</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>crime<span class="sc">$</span>popdens <span class="ot">&lt;-</span> crime<span class="sc">$</span>pop <span class="sc">/</span> crime<span class="sc">$</span>area</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You may wonder why we add <code>crime$</code> in front of every variable. The reason is that R can store more than one data frame, matrix, list, vector etc., at the same time, so the prefix <code>crime$</code> is necessary to avoid ambiguity and ensure that we are working with variables in the <code>crime</code> data. Think of <code>crime$</code> as an address where e.g.&nbsp;the variable <code>pop</code> stays. If you have loaded another data frame that contains a <code>pop</code> variable, R would know that we want to use the variable from the crime dataset and not from the other data frame. There are library packages that can facilitate the process, however, we will cover them later in the module.</p>
 <p>Note that the newly created population density variable is now labelled as the original population variable (<code>pop</code>). Let’s update the label with the method we introduced in Task 4. Note that we do not need to call the library again, as it is already called.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>crime <span class="ot">&lt;-</span> <span class="fu">apply_labels</span>(crime, </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">popdens =</span> <span class="st">"population density: pop / area"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>crime <span class="ot">&lt;-</span> <span class="fu">apply_labels</span>(crime, </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">popdens =</span> <span class="st">"population density: pop / area"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -435,12 +447,12 @@ Use 'expss_output_rnotebook()' to display tables inside R Notebooks.
 <p>Sorting data is a useful action to get a general feeling for the data, e.g.&nbsp;are there any outliers in the dataset? Are there any unusual patterns?</p>
 <p>To change the order of the rows in a data frame, we will apply the <code>order</code> function. We first rank all observations with respect to the population density and store this information in a vector called <code>rank</code>. The rank vector contains indices that we can use to sort the crime data frame. Below, we save the sorted data under a new name, <code>crime.popdens1</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>rank <span class="ot">&lt;-</span> <span class="fu">order</span>(crime<span class="sc">$</span>popdens)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>crime.popdens1 <span class="ot">&lt;-</span> crime[rank,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rank <span class="ot">&lt;-</span> <span class="fu">order</span>(crime<span class="sc">$</span>popdens)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>crime.popdens1 <span class="ot">&lt;-</span> crime[rank,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s see the result (note. how the population density variable is now sorted from the smallest to the largest):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crime.popdens1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crime.popdens1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 8
   pop        crimes     unem       officers   pcinc      area  lawexpc popdens  
@@ -452,13 +464,13 @@ Use 'expss_output_rnotebook()' to display tables inside R Notebooks.
 5 412661     47128       8.3        719       7336       258.5  554.70 1596.3675
 6 173630     18915       8.7        366       7409       100.5  827.16 1727.6617</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you may alternatively use </span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># View(crime.popdens1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you may alternatively use </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># View(crime.popdens1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This procedure sorts the data from the smallest to the largest value. To sort the data from the largest to the smallest number, we set the order argument decreasing to TRUE.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>crime.popdens2 <span class="ot">&lt;-</span> crime[<span class="fu">order</span>(crime<span class="sc">$</span>popdens, <span class="at">decreasing =</span> <span class="cn">TRUE</span>),]</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crime.popdens2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>crime.popdens2 <span class="ot">&lt;-</span> crime[<span class="fu">order</span>(crime<span class="sc">$</span>popdens, <span class="at">decreasing =</span> <span class="cn">TRUE</span>),]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crime.popdens2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 8
   pop        crimes     unem       officers   pcinc      area  lawexpc popdens  
@@ -484,7 +496,7 @@ Use 'expss_output_rnotebook()' to display tables inside R Notebooks.
 <h4 data-number="4.1.7.2" class="anchored" data-anchor-id="guidance-6"><span class="header-section-number">4.1.7.2</span> Guidance</h4>
 <p>The minimum and maximum values can be produced by generating standard descriptive statistics of the variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crime<span class="sc">$</span>popdens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crime<span class="sc">$</span>popdens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   703.8  2797.1  4236.8  4967.5  7052.2 15264.8 </code></pre>
@@ -492,11 +504,11 @@ Use 'expss_output_rnotebook()' to display tables inside R Notebooks.
 </div>
 <p>Before you finish, save the dataset under a new name. Never overwrite your original data!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(crime, <span class="at">file =</span> <span class="st">"./assets/data/crime_v2.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(crime, <span class="at">file =</span> <span class="st">"./assets/data/crime_v2.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above command tells R to use the crime dataset and save it as <code>crime_v2.Rdata</code>. Rdata is an R specific format. R can also save data in .csv format, that can be opened with any text editor or spreadsheet software:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(crime, <span class="at">file =</span> <span class="st">"./assets/data/crime_v2.csv"</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(crime, <span class="at">file =</span> <span class="st">"./assets/data/crime_v2.csv"</span>, <span class="at">row.names =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now you are ready to answer the following questions on your own:</p>
 </section>
@@ -950,8 +962,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./introduction-to-regression-analysis.html" class="pagination-link" aria-label="Introduction to Regression Analysis">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

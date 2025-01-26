@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Introduction to Regression Analysis – R-workshops</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./importing-data-into-R.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-management-in-R.html">Seminar 2 (28 January 2025)</a></li><li class="breadcrumb-item"><a href="./introduction-to-regression-analysis.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R-workshops</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar 1 (21 January 2025)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basics-of-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Basics of R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar 2 (28 January 2025)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-management-in-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./importing-data-into-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data into R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction-to-regression-analysis.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#example-1-crime-data" id="toc-example-1-crime-data" class="nav-link active" data-scroll-target="#example-1-crime-data"><span class="header-section-number">5.1</span> Example 1: Crime data</a>
+  <ul class="collapse">
+  <li><a href="#task-1" id="toc-task-1" class="nav-link" data-scroll-target="#task-1"><span class="header-section-number">5.1.1</span> Task 1</a></li>
+  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2"><span class="header-section-number">5.1.2</span> Task 2</a></li>
+  <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3"><span class="header-section-number">5.1.3</span> Task 3</a></li>
+  <li><a href="#task-4" id="toc-task-4" class="nav-link" data-scroll-target="#task-4"><span class="header-section-number">5.1.4</span> Task 4</a></li>
+  <li><a href="#task-5" id="toc-task-5" class="nav-link" data-scroll-target="#task-5"><span class="header-section-number">5.1.5</span> Task 5</a></li>
+  <li><a href="#task-6" id="toc-task-6" class="nav-link" data-scroll-target="#task-6"><span class="header-section-number">5.1.6</span> Task 6</a></li>
+  </ul></li>
+  <li><a href="#example-2-wage-data" id="toc-example-2-wage-data" class="nav-link" data-scroll-target="#example-2-wage-data"><span class="header-section-number">5.2</span> Example 2: Wage data</a>
+  <ul class="collapse">
+  <li><a href="#task-1-1" id="toc-task-1-1" class="nav-link" data-scroll-target="#task-1-1"><span class="header-section-number">5.2.1</span> Task 1</a></li>
+  <li><a href="#task-2-1" id="toc-task-2-1" class="nav-link" data-scroll-target="#task-2-1"><span class="header-section-number">5.2.2</span> Task 2</a></li>
+  <li><a href="#task-3-1" id="toc-task-3-1" class="nav-link" data-scroll-target="#task-3-1"><span class="header-section-number">5.2.3</span> Task 3</a></li>
+  <li><a href="#task-4-1" id="toc-task-4-1" class="nav-link" data-scroll-target="#task-4-1"><span class="header-section-number">5.2.4</span> Task 4</a></li>
+  <li><a href="#task-4-2" id="toc-task-4-2" class="nav-link" data-scroll-target="#task-4-2"><span class="header-section-number">5.2.5</span> Task 4</a></li>
+  <li><a href="#task-5-1" id="toc-task-5-1" class="nav-link" data-scroll-target="#task-5-1"><span class="header-section-number">5.2.6</span> Task 5</a></li>
+  <li><a href="#task-6-1" id="toc-task-6-1" class="nav-link" data-scroll-target="#task-6-1"><span class="header-section-number">5.2.7</span> Task 6</a></li>
+  <li><a href="#task-7-1" id="toc-task-7-1" class="nav-link" data-scroll-target="#task-7-1"><span class="header-section-number">5.2.8</span> Task 7</a></li>
+  <li><a href="#task-8-1" id="toc-task-8-1" class="nav-link" data-scroll-target="#task-8-1"><span class="header-section-number">5.2.9</span> Task 8</a></li>
+  <li><a href="#task-9-1" id="toc-task-9-1" class="nav-link" data-scroll-target="#task-9-1"><span class="header-section-number">5.2.10</span> Task 9</a></li>
+  <li><a href="#task-10-1" id="toc-task-10-1" class="nav-link" data-scroll-target="#task-10-1"><span class="header-section-number">5.2.11</span> Task 10</a></li>
+  <li><a href="#task-11-1" id="toc-task-11-1" class="nav-link" data-scroll-target="#task-11-1"><span class="header-section-number">5.2.12</span> Task 11</a></li>
+  <li><a href="#task-12-1" id="toc-task-12-1" class="nav-link" data-scroll-target="#task-12-1"><span class="header-section-number">5.2.13</span> Task 12</a></li>
+  </ul></li>
+  <li><a href="#further-exercises" id="toc-further-exercises" class="nav-link" data-scroll-target="#further-exercises"><span class="header-section-number">5.3</span> Further Exercises</a>
+  <ul class="collapse">
+  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks"><span class="header-section-number">5.3.1</span> Tasks</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-management-in-R.html">Seminar 2 (28 January 2025)</a></li><li class="breadcrumb-item"><a href="./introduction-to-regression-analysis.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="example-1-crime-data" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="example-1-crime-data"><span class="header-section-number">5.1</span> Example 1: Crime data</h2>
+<p>The example and instructions provided in this section is taken from <span class="citation" data-cites="riegler22">(<a href="references.html#ref-riegler22" role="doc-biblioref">Riegler 2022</a>)</span>.</p>
+<p>Suppose you are examining the relationship between number of crimes and number of police officers. Below, we will generate descriptive statistics, create a scatter plot and see how we estimate OLS regression.</p>
+<p>We will use the crime data set, which is already saved in <code>Rdata</code> format.</p>
+<section id="task-1" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="task-1"><span class="header-section-number">5.1.1</span> Task 1</h3>
+<p>Open <code>crime_v2.Rdata</code> (if it not already open). You may so this trough the menu or the command line using the <code>load()</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"~/Desktop/R-workshops/assets/data/crime_v2.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-2" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="task-2"><span class="header-section-number">5.1.2</span> Task 2</h3>
+<p>Check the summary statistics for <code>crimes</code> and <code>officers</code> variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crime[, <span class="fu">c</span>(<span class="st">"crimes"</span>, <span class="st">"officers"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     crimes          officers     
+ Min.   :  5276   Min.   : 109.0  
+ 1st Qu.: 19658   1st Qu.: 402.8  
+ Median : 32518   Median : 694.5  
+ Mean   : 38123   Mean   : 902.1  
+ 3rd Qu.: 49434   3rd Qu.:1212.0  
+ Max.   :152962   Max.   :4092.0  </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard deviation for the 'crimes' variable</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sd_crimes <span class="ot">&lt;-</span> <span class="fu">sd</span>(crime<span class="sc">$</span>crimes, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard deviation for the 'officers' variable</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>sd_officers <span class="ot">&lt;-</span> <span class="fu">sd</span>(crime<span class="sc">$</span>officers, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>sd_crimes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27660.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sd_officers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 721.7255</code></pre>
+</div>
+</div>
+<p>Note the <code>na.rm = TRUE</code> above. This argument ensures that nay <code>NA</code> values are removed before the calculation.</p>
+</section>
+<section id="task-3" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="task-3"><span class="header-section-number">5.1.3</span> Task 3</h3>
+<p>In addition to checking summary statistics, it is always wise to visualise your data before getting into more complicated modelling.</p>
+<p>For this task, generate a scatter plot with number of crimes on the y-axis and the number of police officers on the x-axis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(crime<span class="sc">$</span>officers<span class="sc">~</span>crime<span class="sc">$</span>crimes, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Relationship between number of police officers and crime"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="introduction-to-regression-analysis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="task-4" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="task-4"><span class="header-section-number">5.1.4</span> Task 4</h3>
+<p>Calculate the Covariance and the Correlation Coefficient between number of crimes and number of police officers. Comment on their values.</p>
+<section id="guidance" class="level4" data-number="5.1.4.1">
+<h4 data-number="5.1.4.1" class="anchored" data-anchor-id="guidance"><span class="header-section-number">5.1.4.1</span> Guidance</h4>
+<p>A scatter plot is a good start for identifying relationships between two variables, but it is not sufficient to identify accurately how strong the relationship is between <code>crimes</code> and <code>officers</code>. There are two numerical statistics, that provide information about the relationship between two variables: The Covariance and the Correlation Coefficient.</p>
+<p>To produce a Covariance matrix, use the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(crime<span class="sc">$</span>officers, crime<span class="sc">$</span>crimes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18212436</code></pre>
+</div>
+</div>
+<p>The result is: 18,212,436! This number may appear to be too large but the value we obtain as covariance depends on the measuremetn levels of the variables. This measure (i.e.&nbsp;the covariance) does not provide any information on how strong this relationship between <code>crimes</code> and <code>officers</code> is. It only reveals that there is a positive relationship between the number of police officers and the number of crimes committed.</p>
+<p>Instead of using the covariance, we can use a <em>standardised covariance</em> - the <em>correlation coefficient</em>. To calculate the correlation matrix, we only have to adjust slightly the covariance command.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(crime<span class="sc">$</span>officers, crime<span class="sc">$</span>crimes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9123032</code></pre>
+</div>
+</div>
+<p>The correlation coefficient between number of officers and crimes is 0.91. We conclude that there is a strong positive relationship between our two variables.</p>
+</section>
+</section>
+<section id="task-5" class="level3" data-number="5.1.5">
+<h3 data-number="5.1.5" class="anchored" data-anchor-id="task-5"><span class="header-section-number">5.1.5</span> Task 5</h3>
+<p>Regress the number of police officers on crimes and comment on:</p>
+<ul>
+<li><p>the sign and magnitude of the regression coefficients</p></li>
+<li><p>the goodness of fit of the estimated model.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(officers <span class="sc">~</span> crimes, <span class="at">data =</span> crime)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = officers ~ crimes, data = crime)
+
+Coefficients:
+(Intercept)       crimes  
+    -5.4183       0.0238  </code></pre>
+</div>
+</div>
+<p>We can save this estimation under an object (please note that we use <code>model_1</code> below, but you may give any name as long as it satisfies the naming conventions):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(officers <span class="sc">~</span> crimes, <span class="at">data =</span> crime)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># display the model</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>model_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = officers ~ crimes, data = crime)
+
+Coefficients:
+(Intercept)       crimes  
+    -5.4183       0.0238  </code></pre>
+</div>
+</div>
+<p>Although we see the estimated coefficients in the above output we do not have information about the other statistics that we need to proceed. We use the <code>summary()</code> function below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = officers ~ crimes, data = crime)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-756.64 -153.71  -25.75   89.64 1000.97 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -5.418291  75.587257  -0.072    0.943    
+crimes       0.023804   0.001611  14.777   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 298.9 on 44 degrees of freedom
+Multiple R-squared:  0.8323,    Adjusted R-squared:  0.8285 
+F-statistic: 218.4 on 1 and 44 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>The intercept term is not statistically significant.</p>
+<p>The <code>crimes</code> variable is statistically significant at 0.1%. (Note the significance codes in the output).</p>
+<p>The slope coefficient states that for every additional crime, we observe on average of 0.024 more police officers. Using more reader-friendly numbers, we can also infer that for every 1,000 additional crimes committed within a city, 24 more police officers are employed. Note how the latter way of phrasing makes more sense.</p>
+<p><span class="math inline">\(R^2\)</span> is the measure that provides information on the overall goodness of fit of the model. In this case it is 0.83. This means that 83% of the variation in police officers can be explained with the variation in number of crimes committed. Our estimated model has a good degree of explanatory power.</p>
+<p>Looking at the F-statistic (218.4 with a p-value of almost zero), we can conclude that the model, overall, is statistically significant.</p>
+</section>
+<section id="task-6" class="level3" data-number="5.1.6">
+<h3 data-number="5.1.6" class="anchored" data-anchor-id="task-6"><span class="header-section-number">5.1.6</span> Task 6</h3>
+<p>Add a regression line to the scatter plot you created in Task 3.</p>
+<section id="guidance-1" class="level4" data-number="5.1.6.1">
+<h4 data-number="5.1.6.1" class="anchored" data-anchor-id="guidance-1"><span class="header-section-number">5.1.6.1</span> Guidance</h4>
+<p>To add a regression line to the plot, we have to use the previously saved regression object <code>model_1</code> and add it to the previous scatter plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(crime<span class="sc">$</span>officers<span class="sc">~</span>crime<span class="sc">$</span>crimes, </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Relationship between number of police officers and crime"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="introduction-to-regression-analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="example-2-wage-data" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="example-2-wage-data"><span class="header-section-number">5.2</span> Example 2: Wage data</h2>
+<section id="task-1-1" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="task-1-1"><span class="header-section-number">5.2.1</span> Task 1</h3>
+<section id="task" class="level4" data-number="5.2.1.1">
+<h4 data-number="5.2.1.1" class="anchored" data-anchor-id="task"><span class="header-section-number">5.2.1.1</span> Task</h4>
+<p>Import <code>wage.xls</code> data into R and view the first few rows of the data to have an idea about the contents of the variables, and then save the data in R format.</p>
+</section>
+<section id="guidance-2" class="level4" data-number="5.2.1.2">
+<h4 data-number="5.2.1.2" class="anchored" data-anchor-id="guidance-2"><span class="header-section-number">5.2.1.2</span> Guidance</h4>
+<p>Use <code>read_excel()</code> and <code>head()</code> functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("readxl")</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Excel data</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>wage2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./assets/data/wage2.xls"</span>, <span class="at">sheet =</span> <span class="st">"wage2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wage2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 15
+   wage hours    IQ   KWW  educ exper tenure   age married south urban  sibs
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1   769    40    93    35    12    11      2    31       1     0     1     1
+2   808    50   119    41    18    11     16    37       1     0     1     1
+3   825    40   108    46    14    11      9    33       1     0     1     1
+4   650    40    96    32    12    13      7    32       1     0     1     4
+5   562    40    74    27    11    14      5    34       1     0     1    10
+6  1400    40   116    43    16    14      2    35       1     0     1     1
+# ℹ 3 more variables: brthord &lt;dbl&gt;, meduc &lt;dbl&gt;, feduc &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save data in R format</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(wage2, <span class="at">file =</span> <span class="st">"./assets/data/wage2.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="task-2-1" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="task-2-1"><span class="header-section-number">5.2.2</span> Task 2</h3>
+<section id="task-7" class="level4" data-number="5.2.2.1">
+<h4 data-number="5.2.2.1" class="anchored" data-anchor-id="task-7"><span class="header-section-number">5.2.2.1</span> Task</h4>
+<p>Label variable <code>educ</code> as “years of schooling” and <code>exper</code> as “years of experience”.</p>
+</section>
+<section id="guidance-3" class="level4" data-number="5.2.2.2">
+<h4 data-number="5.2.2.2" class="anchored" data-anchor-id="guidance-3"><span class="header-section-number">5.2.2.2</span> Guidance</h4>
+<p>We will need the <code>expss</code> package to label the variables. The installation and calling of the package is deactivated below since we already have done these steps above. After running the below command check the changes in the data from the Environment window on the top-right.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("expss")</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(expss)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: maditr</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+To get total summary skip 'by' argument: take_all(mtcars, mean)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>wage2 <span class="ot">&lt;-</span> <span class="fu">apply_labels</span>(wage2, </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">educ =</span> <span class="st">"years of schooling"</span>, </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">exper =</span> <span class="st">"years of experince"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="task-3-1" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="task-3-1"><span class="header-section-number">5.2.3</span> Task 3</h3>
+<section id="task-8" class="level4" data-number="5.2.3.1">
+<h4 data-number="5.2.3.1" class="anchored" data-anchor-id="task-8"><span class="header-section-number">5.2.3.1</span> Task</h4>
+<p>Generate two new variables: hourly wage and logarithmic wage.</p>
+</section>
+<section id="guidance-4" class="level4" data-number="5.2.3.2">
+<h4 data-number="5.2.3.2" class="anchored" data-anchor-id="guidance-4"><span class="header-section-number">5.2.3.2</span> Guidance</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate new variables</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>wage2<span class="sc">$</span>hourly_wage <span class="ot">&lt;-</span> wage2<span class="sc">$</span>wage <span class="sc">/</span> wage2<span class="sc">$</span>hours</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>wage2<span class="sc">$</span>ln_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage2<span class="sc">$</span>wage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="task-4-1" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="task-4-1"><span class="header-section-number">5.2.4</span> Task 4</h3>
+<section id="task-9" class="level4" data-number="5.2.4.1">
+<h4 data-number="5.2.4.1" class="anchored" data-anchor-id="task-9"><span class="header-section-number">5.2.4.1</span> Task</h4>
+<p>Check the summary statistics for (i) the <code>wage</code> variable, (ii) for all variables.</p>
+</section>
+<section id="guidance-5" class="level4" data-number="5.2.4.2">
+<h4 data-number="5.2.4.2" class="anchored" data-anchor-id="guidance-5"><span class="header-section-number">5.2.4.2</span> Guidance</h4>
+<p>We will use the <code>summary()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics for the wage variable only</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wage2<span class="sc">$</span>wage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  115.0   669.0   905.0   957.9  1160.0  3078.0 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics for all variables in wage2 data</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wage2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      wage            hours             IQ             KWW       
+ Min.   : 115.0   Min.   :20.00   Min.   : 50.0   Min.   :12.00  
+ 1st Qu.: 669.0   1st Qu.:40.00   1st Qu.: 92.0   1st Qu.:31.00  
+ Median : 905.0   Median :40.00   Median :102.0   Median :37.00  
+ Mean   : 957.9   Mean   :43.93   Mean   :101.3   Mean   :35.74  
+ 3rd Qu.:1160.0   3rd Qu.:48.00   3rd Qu.:112.0   3rd Qu.:41.00  
+ Max.   :3078.0   Max.   :80.00   Max.   :145.0   Max.   :56.00  
+                                                                 
+      educ           exper           tenure            age       
+ Min.   : 9.00   Min.   : 1.00   Min.   : 0.000   Min.   :28.00  
+ 1st Qu.:12.00   1st Qu.: 8.00   1st Qu.: 3.000   1st Qu.:30.00  
+ Median :12.00   Median :11.00   Median : 7.000   Median :33.00  
+ Mean   :13.47   Mean   :11.56   Mean   : 7.234   Mean   :33.08  
+ 3rd Qu.:16.00   3rd Qu.:15.00   3rd Qu.:11.000   3rd Qu.:36.00  
+ Max.   :18.00   Max.   :23.00   Max.   :22.000   Max.   :38.00  
+                                                                 
+    married          south            urban             sibs       
+ Min.   :0.000   Min.   :0.0000   Min.   :0.0000   Min.   : 0.000  
+ 1st Qu.:1.000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.: 1.000  
+ Median :1.000   Median :0.0000   Median :1.0000   Median : 2.000  
+ Mean   :0.893   Mean   :0.3412   Mean   :0.7176   Mean   : 2.941  
+ 3rd Qu.:1.000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.: 4.000  
+ Max.   :1.000   Max.   :1.0000   Max.   :1.0000   Max.   :14.000  
+                                                                   
+    brthord           meduc           feduc        hourly_wage    
+ Min.   : 1.000   Min.   : 0.00   Min.   : 0.00   Min.   :  2.30  
+ 1st Qu.: 1.000   1st Qu.: 8.00   1st Qu.: 8.00   1st Qu.: 15.07  
+ Median : 2.000   Median :12.00   Median :10.00   Median : 21.02  
+ Mean   : 2.277   Mean   :10.68   Mean   :10.22   Mean   : 22.32  
+ 3rd Qu.: 3.000   3rd Qu.:12.00   3rd Qu.:12.00   3rd Qu.: 27.70  
+ Max.   :10.000   Max.   :18.00   Max.   :18.00   Max.   :102.60  
+ NA's   :83       NA's   :78      NA's   :194                     
+    ln_wage     
+ Min.   :4.745  
+ 1st Qu.:6.506  
+ Median :6.808  
+ Mean   :6.779  
+ 3rd Qu.:7.056  
+ Max.   :8.032  
+                </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="task-4-2" class="level3" data-number="5.2.5">
+<h3 data-number="5.2.5" class="anchored" data-anchor-id="task-4-2"><span class="header-section-number">5.2.5</span> Task 4</h3>
+<section id="task-10" class="level4" data-number="5.2.5.1">
+<h4 data-number="5.2.5.1" class="anchored" data-anchor-id="task-10"><span class="header-section-number">5.2.5.1</span> Task</h4>
+<p>Examine the relationship between education and wage using a scatter plot.</p>
+</section>
+<section id="guidance-6" class="level4" data-number="5.2.5.2">
+<h4 data-number="5.2.5.2" class="anchored" data-anchor-id="guidance-6"><span class="header-section-number">5.2.5.2</span> Guidance</h4>
+<p>We use the <code>ggplot2</code> package to draw plots. First install the package and call the library.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggplot2")</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'ggplot2'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:expss':
+
+    vars</code></pre>
+</div>
+</div>
+<p>Education is expected to have a positive impact on wage. In our scatter plot, <code>educ</code> will be on the horizontal-axis while <code>wage</code> will be on the vertical-axis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage2, <span class="fu">aes</span>(<span class="at">x =</span> educ, <span class="at">y =</span> wage)) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatter plot of Wage vs. Education"</span>, <span class="at">x =</span> <span class="st">"Years of Schooling"</span>, <span class="at">y =</span> <span class="st">"Wage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="introduction-to-regression-analysis_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You see above the full set of lines to create this plot. But let us do this step by step to have a better understanding. First, we bring the <code>educ</code> and <code>wage</code> variables from the <code>wage2</code> data and position these on our plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage2, <span class="fu">aes</span>(<span class="at">x =</span> educ, <span class="at">y =</span> wage))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="introduction-to-regression-analysis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We then add (using the <code>+</code> sign), the observations in our data, represented by dots.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage2, <span class="fu">aes</span>(<span class="at">x =</span> educ, <span class="at">y =</span> wage)) <span class="sc">+</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="introduction-to-regression-analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It is always good practice to give a title for your plot. Notice also that the horizontal and vertical axes above are labelled by the variable names. We may also replace these with proper definitions of the variables. This is to make it easier for the readers to understand your plots:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage2, <span class="fu">aes</span>(<span class="at">x =</span> educ, <span class="at">y =</span> wage)) <span class="sc">+</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatter plot of Wage vs. Education"</span>, <span class="at">x =</span> <span class="st">"Years of Schooling"</span>, <span class="at">y =</span> <span class="st">"Wage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="introduction-to-regression-analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="task-5-1" class="level3" data-number="5.2.6">
+<h3 data-number="5.2.6" class="anchored" data-anchor-id="task-5-1"><span class="header-section-number">5.2.6</span> Task 5</h3>
+<section id="task-11" class="level4" data-number="5.2.6.1">
+<h4 data-number="5.2.6.1" class="anchored" data-anchor-id="task-11"><span class="header-section-number">5.2.6.1</span> Task</h4>
+<p>Tabulate the <code>urban</code> variable to see the distribution of observations in rural and urban areas</p>
+</section>
+<section id="guidance-7" class="level4" data-number="5.2.6.2">
+<h4 data-number="5.2.6.2" class="anchored" data-anchor-id="guidance-7"><span class="header-section-number">5.2.6.2</span> Guidance</h4>
+<p>We use the <code>table()</code> function for that purpose.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(wage2<span class="sc">$</span>urban)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  0   1 
+264 671 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="task-6-1" class="level3" data-number="5.2.7">
+<h3 data-number="5.2.7" class="anchored" data-anchor-id="task-6-1"><span class="header-section-number">5.2.7</span> Task 6</h3>
+<section id="task-12" class="level4" data-number="5.2.7.1">
+<h4 data-number="5.2.7.1" class="anchored" data-anchor-id="task-12"><span class="header-section-number">5.2.7.1</span> Task</h4>
+<p>Let’s say we are interested to plot the education-wage relationship differentiating between people in rural and urban areas. Replicate the scatter plot above, but this time, using different colors for rural and urban.</p>
+</section>
+<section id="guidance-8" class="level4" data-number="5.2.7.2">
+<h4 data-number="5.2.7.2" class="anchored" data-anchor-id="guidance-8"><span class="header-section-number">5.2.7.2</span> Guidance</h4>
+<p>Notice how we add the <code>color = urban</code> option below. We do the same for the label too.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot - colored by urban</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage2, <span class="fu">aes</span>(<span class="at">x =</span> educ, <span class="at">y =</span> wage, <span class="at">color =</span> urban)) <span class="sc">+</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatter plot of Wage vs. Education"</span>, <span class="at">x =</span> <span class="st">"Years of Schooling"</span>, <span class="at">y =</span> <span class="st">"Wage"</span>, <span class="at">color =</span> <span class="st">"urban"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="introduction-to-regression-analysis_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="task-7-1" class="level3" data-number="5.2.8">
+<h3 data-number="5.2.8" class="anchored" data-anchor-id="task-7-1"><span class="header-section-number">5.2.8</span> Task 7</h3>
+<section id="task-13" class="level4" data-number="5.2.8.1">
+<h4 data-number="5.2.8.1" class="anchored" data-anchor-id="task-13"><span class="header-section-number">5.2.8.1</span> Task</h4>
+<p>Calculate the correlation coefficient between wage and education.</p>
+</section>
+<section id="guidance-9" class="level4" data-number="5.2.8.2">
+<h4 data-number="5.2.8.2" class="anchored" data-anchor-id="guidance-9"><span class="header-section-number">5.2.8.2</span> Guidance</h4>
+<p>We can calculate the correlation coefficients using the <code>cor()</code> function. In the first example below, the correlation coefficient is reported as a single number, while in the second example, we get a correlation matrix.</p>
+<p>In most of empirical work, we are usually interested with pairwise correlations among all variables. Hence, we may use the correlation matrix to check the binary correlations among all variables in our sample. This is provided in the third example below.</p>
+<p>The <code>"use = complete.obs"</code> added to the commands below asks R to handle missing values by casewise deletion.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(wage2<span class="sc">$</span>wage, wage2<span class="sc">$</span>educ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3271087</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(wage2[, <span class="fu">c</span>(<span class="st">"wage"</span>, <span class="st">"educ"</span>)], <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          wage      educ
+wage 1.0000000 0.3271087
+educ 0.3271087 1.0000000</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(wage2, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    wage        hours          IQ         KWW        educ
+wage         1.000000000 -0.009504302  0.30908783  0.32613058  0.32710869
+hours       -0.009504302  1.000000000  0.07383930  0.11388938  0.09100889
+IQ           0.309087827  0.073839301  1.00000000  0.41351552  0.51569701
+KWW          0.326130577  0.113889381  0.41351552  1.00000000  0.38813424
+educ         0.327108690  0.091008888  0.51569701  0.38813424  1.00000000
+exper        0.002189702 -0.062126227 -0.22491253  0.01745245 -0.45557312
+tenure       0.128266391 -0.055528006  0.04215883  0.14139800 -0.03616655
+age          0.156701761  0.024811636 -0.04374091  0.39305297 -0.01225396
+married      0.136582670  0.032563350 -0.01466753  0.08994782 -0.05856602
+south       -0.159387287 -0.029519177 -0.20978466 -0.09439242 -0.09703298
+urban        0.198406472  0.016573046  0.03893553  0.09819025  0.07215091
+sibs        -0.159203728 -0.049602555 -0.28477277 -0.28497534 -0.23928810
+brthord     -0.145485385 -0.043129582 -0.17943947 -0.15358472 -0.20499246
+meduc        0.214831839  0.076619806  0.33180383  0.24079168  0.36423913
+feduc        0.237586922  0.063172297  0.34390758  0.23488927  0.42692545
+hourly_wage  0.931240501 -0.317645466  0.26502635  0.26059936  0.27167136
+ln_wage      0.953141156 -0.047219079  0.31478770  0.30627128  0.31211665
+                   exper      tenure          age      married       south
+wage         0.002189702  0.12826639  0.156701761  0.136582670 -0.15938729
+hours       -0.062126227 -0.05552801  0.024811636  0.032563350 -0.02951918
+IQ          -0.224912532  0.04215883 -0.043740911 -0.014667528 -0.20978466
+KWW          0.017452446  0.14139800  0.393052967  0.089947816 -0.09439242
+educ        -0.455573115 -0.03616655 -0.012253956 -0.058566019 -0.09703298
+exper        1.000000000  0.24365440  0.495329763  0.106349115  0.02125724
+tenure       0.243654402  1.00000000  0.270601647  0.072605374 -0.06169141
+age          0.495329763  0.27060165  1.000000000  0.106980249 -0.02947768
+married      0.106349115  0.07260537  0.106980249  1.000000000  0.02275672
+south        0.021257241 -0.06169141 -0.029477681  0.022756718  1.00000000
+urban       -0.047385845 -0.03848582 -0.006749288 -0.040248179 -0.10989797
+sibs         0.064310470 -0.03916116 -0.040719238 -0.004327422  0.06631979
+brthord      0.088300019 -0.02847775  0.005435916 -0.014737189  0.09370679
+meduc       -0.186317286 -0.01496769 -0.029319099 -0.022763437 -0.15787359
+feduc       -0.256792630 -0.05924123 -0.071303285 -0.020324390 -0.17236334
+hourly_wage  0.017757793  0.13541822  0.126683019  0.115115701 -0.14716118
+ln_wage      0.020601158  0.18585262  0.161822314  0.149975894 -0.19481092
+                   urban         sibs      brthord       meduc       feduc
+wage         0.198406472 -0.159203728 -0.145485385  0.21483184  0.23758692
+hours        0.016573046 -0.049602555 -0.043129582  0.07661981  0.06317230
+IQ           0.038935525 -0.284772765 -0.179439471  0.33180383  0.34390758
+KWW          0.098190247 -0.284975345 -0.153584717  0.24079168  0.23488927
+educ         0.072150908 -0.239288104 -0.204992462  0.36423913  0.42692545
+exper       -0.047385845  0.064310470  0.088300019 -0.18631729 -0.25679263
+tenure      -0.038485824 -0.039161158 -0.028477749 -0.01496769 -0.05924123
+age         -0.006749288 -0.040719238  0.005435916 -0.02931910 -0.07130328
+married     -0.040248179 -0.004327422 -0.014737189 -0.02276344 -0.02032439
+south       -0.109897970  0.066319792  0.093706790 -0.15787359 -0.17236334
+urban        1.000000000 -0.031468824  0.002419787  0.03402366  0.11223944
+sibs        -0.031468824  1.000000000  0.593913799 -0.28715120 -0.23202649
+brthord      0.002419787  0.593913799  1.000000000 -0.27593376 -0.23037060
+meduc        0.034023660 -0.287151198 -0.275933760  1.00000000  0.57649476
+feduc        0.112239438 -0.232026494 -0.230370600  0.57649476  1.00000000
+hourly_wage  0.189240304 -0.131364072 -0.120293460  0.18348733  0.20469678
+ln_wage      0.203797585 -0.152809172 -0.141852712  0.21357476  0.22338514
+            hourly_wage     ln_wage
+wage         0.93124050  0.95314116
+hours       -0.31764547 -0.04721908
+IQ           0.26502635  0.31478770
+KWW          0.26059936  0.30627128
+educ         0.27167136  0.31211665
+exper        0.01775779  0.02060116
+tenure       0.13541822  0.18585262
+age          0.12668302  0.16182231
+married      0.11511570  0.14997589
+south       -0.14716118 -0.19481092
+urban        0.18924030  0.20379758
+sibs        -0.13136407 -0.15280917
+brthord     -0.12029346 -0.14185271
+meduc        0.18348733  0.21357476
+feduc        0.20469678  0.22338514
+hourly_wage  1.00000000  0.89974921
+ln_wage      0.89974921  1.00000000</code></pre>
+</div>
+</div>
+<p>The above table is informative but the reported numbers have far too many decimals. It is distracting our focus. Below, we round these in two decimal points, which is enough to have an idea about the strength of the correlation between our variables</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate pairwise correlations and store them under name cor_matrix</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>cor_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(wage2, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Round the correlation values to 2 decimal places and save them under the name rounded_cor_matrix</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>rounded_cor_matrix <span class="ot">&lt;-</span> <span class="fu">round</span>(cor_matrix, <span class="dv">2</span>)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the rounded correlation matrix</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rounded_cor_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             wage hours    IQ   KWW  educ exper tenure   age married south
+wage         1.00 -0.01  0.31  0.33  0.33  0.00   0.13  0.16    0.14 -0.16
+hours       -0.01  1.00  0.07  0.11  0.09 -0.06  -0.06  0.02    0.03 -0.03
+IQ           0.31  0.07  1.00  0.41  0.52 -0.22   0.04 -0.04   -0.01 -0.21
+KWW          0.33  0.11  0.41  1.00  0.39  0.02   0.14  0.39    0.09 -0.09
+educ         0.33  0.09  0.52  0.39  1.00 -0.46  -0.04 -0.01   -0.06 -0.10
+exper        0.00 -0.06 -0.22  0.02 -0.46  1.00   0.24  0.50    0.11  0.02
+tenure       0.13 -0.06  0.04  0.14 -0.04  0.24   1.00  0.27    0.07 -0.06
+age          0.16  0.02 -0.04  0.39 -0.01  0.50   0.27  1.00    0.11 -0.03
+married      0.14  0.03 -0.01  0.09 -0.06  0.11   0.07  0.11    1.00  0.02
+south       -0.16 -0.03 -0.21 -0.09 -0.10  0.02  -0.06 -0.03    0.02  1.00
+urban        0.20  0.02  0.04  0.10  0.07 -0.05  -0.04 -0.01   -0.04 -0.11
+sibs        -0.16 -0.05 -0.28 -0.28 -0.24  0.06  -0.04 -0.04    0.00  0.07
+brthord     -0.15 -0.04 -0.18 -0.15 -0.20  0.09  -0.03  0.01   -0.01  0.09
+meduc        0.21  0.08  0.33  0.24  0.36 -0.19  -0.01 -0.03   -0.02 -0.16
+feduc        0.24  0.06  0.34  0.23  0.43 -0.26  -0.06 -0.07   -0.02 -0.17
+hourly_wage  0.93 -0.32  0.27  0.26  0.27  0.02   0.14  0.13    0.12 -0.15
+ln_wage      0.95 -0.05  0.31  0.31  0.31  0.02   0.19  0.16    0.15 -0.19
+            urban  sibs brthord meduc feduc hourly_wage ln_wage
+wage         0.20 -0.16   -0.15  0.21  0.24        0.93    0.95
+hours        0.02 -0.05   -0.04  0.08  0.06       -0.32   -0.05
+IQ           0.04 -0.28   -0.18  0.33  0.34        0.27    0.31
+KWW          0.10 -0.28   -0.15  0.24  0.23        0.26    0.31
+educ         0.07 -0.24   -0.20  0.36  0.43        0.27    0.31
+exper       -0.05  0.06    0.09 -0.19 -0.26        0.02    0.02
+tenure      -0.04 -0.04   -0.03 -0.01 -0.06        0.14    0.19
+age         -0.01 -0.04    0.01 -0.03 -0.07        0.13    0.16
+married     -0.04  0.00   -0.01 -0.02 -0.02        0.12    0.15
+south       -0.11  0.07    0.09 -0.16 -0.17       -0.15   -0.19
+urban        1.00 -0.03    0.00  0.03  0.11        0.19    0.20
+sibs        -0.03  1.00    0.59 -0.29 -0.23       -0.13   -0.15
+brthord      0.00  0.59    1.00 -0.28 -0.23       -0.12   -0.14
+meduc        0.03 -0.29   -0.28  1.00  0.58        0.18    0.21
+feduc        0.11 -0.23   -0.23  0.58  1.00        0.20    0.22
+hourly_wage  0.19 -0.13   -0.12  0.18  0.20        1.00    0.90
+ln_wage      0.20 -0.15   -0.14  0.21  0.22        0.90    1.00</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="task-8-1" class="level3" data-number="5.2.9">
+<h3 data-number="5.2.9" class="anchored" data-anchor-id="task-8-1"><span class="header-section-number">5.2.9</span> Task 8</h3>
+<section id="task-14" class="level4" data-number="5.2.9.1">
+<h4 data-number="5.2.9.1" class="anchored" data-anchor-id="task-14"><span class="header-section-number">5.2.9.1</span> Task</h4>
+<p>Estimate a regression model where wage is regressed on education. Interpret the results.</p>
+</section>
+<section id="guidance-10" class="level4" data-number="5.2.9.2">
+<h4 data-number="5.2.9.2" class="anchored" data-anchor-id="guidance-10"><span class="header-section-number">5.2.9.2</span> Guidance</h4>
+<p>We use the <code>lm()</code> function to estimate linear regression models. You may read <code>~</code> in <code>wage ~ educ</code> below as “approximately modelled as” <span class="citation" data-cites="james23">James et al. (<a href="references.html#ref-james23" role="doc-biblioref">2023</a>)</span>. We may also say “wage is regressed on education”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>model_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ, <span class="at">data =</span> wage2)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = wage ~ educ, data = wage2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-877.38 -268.63  -38.38  207.05 2148.26 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  146.952     77.715   1.891   0.0589 .  
+educ          60.214      5.695  10.573   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 382.3 on 933 degrees of freedom
+Multiple R-squared:  0.107, Adjusted R-squared:  0.106 
+F-statistic: 111.8 on 1 and 933 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>In the above regression output, we see that education has a statistically significant impact on wages. Each year of schooling increases wage by around £60, on average. The F test tells us that the regression model has an explanatory power, even though the R-squared value is low.</p>
+</section>
+</section>
+<section id="task-9-1" class="level3" data-number="5.2.10">
+<h3 data-number="5.2.10" class="anchored" data-anchor-id="task-9-1"><span class="header-section-number">5.2.10</span> Task 9</h3>
+<section id="task-15" class="level4" data-number="5.2.10.1">
+<h4 data-number="5.2.10.1" class="anchored" data-anchor-id="task-15"><span class="header-section-number">5.2.10.1</span> Task</h4>
+<p>Using the regression model above, predict what the wage would be for given values of education (how much do we expect the wage would be for given years of schooling).</p>
+</section>
+<section id="guidance-11" class="level4" data-number="5.2.10.2">
+<h4 data-number="5.2.10.2" class="anchored" data-anchor-id="guidance-11"><span class="header-section-number">5.2.10.2</span> Guidance</h4>
+<p>Below, we recall <code>model_1</code> to calculate predicted values; save the predictions under name <code>wage_hat</code> under <code>wage2</code> data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save predicted values under name wage_hat</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>wage2<span class="sc">$</span>wage_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="task-10-1" class="level3" data-number="5.2.11">
+<h3 data-number="5.2.11" class="anchored" data-anchor-id="task-10-1"><span class="header-section-number">5.2.11</span> Task 10</h3>
+<section id="task-16" class="level4" data-number="5.2.11.1">
+<h4 data-number="5.2.11.1" class="anchored" data-anchor-id="task-16"><span class="header-section-number">5.2.11.1</span> Task</h4>
+<p>Add the estimated regression line to the wage-education scatter plot.</p>
+</section>
+<section id="guidance-12" class="level4" data-number="5.2.11.2">
+<h4 data-number="5.2.11.2" class="anchored" data-anchor-id="guidance-12"><span class="header-section-number">5.2.11.2</span> Guidance</h4>
+<p>We will be adding the regression line to the scatter plot we produced above. We use <code>geom_smooth</code> for this purpose. Let’s first remember what we did before:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot of education and wage</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage2, <span class="fu">aes</span>(<span class="at">x =</span> educ, <span class="at">y =</span> wage)) <span class="sc">+</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatter plot with Fitted Line"</span>, <span class="at">x =</span> <span class="st">"Years of Schooling"</span>, <span class="at">y =</span> <span class="st">"Wage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="introduction-to-regression-analysis_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, let’s add the regression line:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot with fitted line</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage2, <span class="fu">aes</span>(<span class="at">x =</span> educ, <span class="at">y =</span> wage)) <span class="sc">+</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatter plot with Fitted Line"</span>, <span class="at">x =</span> <span class="st">"Years of Schooling"</span>, <span class="at">y =</span> <span class="st">"Wage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="introduction-to-regression-analysis_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that we could save this plot as an object by assiging it a name on the left hand side of the command. We will do that below and name the plot as <code>scatter_wage_educ</code>.</p>
+<p>Can you guess what the plot would look if we changed <code>se = FALSE</code> to <code>se = TRUE</code> above? We can also try that below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot with fitted line</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>scatter_wage_educ <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(wage2, <span class="fu">aes</span>(<span class="at">x =</span> educ, <span class="at">y =</span> wage)) <span class="sc">+</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scatter plot with Fitted Line"</span>, <span class="at">x =</span> <span class="st">"Years of Schooling"</span>, <span class="at">y =</span> <span class="st">"Wage"</span>)</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(scatter_wage_educ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="introduction-to-regression-analysis_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="task-11-1" class="level3" data-number="5.2.12">
+<h3 data-number="5.2.12" class="anchored" data-anchor-id="task-11-1"><span class="header-section-number">5.2.12</span> Task 11</h3>
+<section id="task-17" class="level4" data-number="5.2.12.1">
+<h4 data-number="5.2.12.1" class="anchored" data-anchor-id="task-17"><span class="header-section-number">5.2.12.1</span> Task</h4>
+<p>Estimate a multiple regression model by adding experience and urban residence into the above regression. Save it under name <code>model_2</code></p>
+</section>
+<section id="guidance-13" class="level4" data-number="5.2.12.2">
+<h4 data-number="5.2.12.2" class="anchored" data-anchor-id="guidance-13"><span class="header-section-number">5.2.12.2</span> Guidance</h4>
+<p>We will add <code>exper</code> and <code>urban</code> variables into the regression model using <code>+</code> sign.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>model_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ <span class="sc">+</span> exper <span class="sc">+</span> urban, <span class="at">data =</span> wage2)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = wage ~ educ + exper + urban, data = wage2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-799.67 -234.04  -34.26  197.89 2119.62 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -362.821    106.419  -3.409 0.000679 ***
+educ          74.119      6.193  11.968  &lt; 2e-16 ***
+exper         17.940      3.105   5.777 1.03e-08 ***
+urban        160.306     26.920   5.955 3.69e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 369.5 on 931 degrees of freedom
+Multiple R-squared:  0.1676,    Adjusted R-squared:  0.1649 
+F-statistic: 62.47 on 3 and 931 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>How does <code>model_2</code> compare to <code>model_1</code>?</p>
+</section>
+</section>
+<section id="task-12-1" class="level3" data-number="5.2.13">
+<h3 data-number="5.2.13" class="anchored" data-anchor-id="task-12-1"><span class="header-section-number">5.2.13</span> Task 12</h3>
+<section id="task-18" class="level4" data-number="5.2.13.1">
+<h4 data-number="5.2.13.1" class="anchored" data-anchor-id="task-18"><span class="header-section-number">5.2.13.1</span> Task</h4>
+<p>Save your data to keep the newly created <code>hourly_wage</code> and <code>ln_wage</code> variables.</p>
+</section>
+<section id="guidance-14" class="level4" data-number="5.2.13.2">
+<h4 data-number="5.2.13.2" class="anchored" data-anchor-id="guidance-14"><span class="header-section-number">5.2.13.2</span> Guidance</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save data in R format</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(wage2, <span class="at">file =</span> <span class="st">"./assets/data/wage2.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="further-exercises" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="further-exercises"><span class="header-section-number">5.3</span> Further Exercises</h2>
+<p>Download the data set called EAWE21.Rdata from the module page on Aula and save it. This is a subset of the Educational Attainment and Wage Equations data set used in Dougherty (2016) available from <a href="https://global.oup.com/uk/orc/busecon/economics/dougherty5e/student/datasets/eawe/" class="uri">https://global.oup.com/uk/orc/busecon/economics/dougherty5e/student/datasets/eawe/</a>. For this exercise we are interested in two variables:</p>
+<ul>
+<li><p>EXP : Total out-of-school work experience (years) as of the 2002 interview</p></li>
+<li><p>EARNINGS : Current hourly earnings in $ reported at the 2002 interview</p></li>
+</ul>
+<section id="tasks" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="tasks"><span class="header-section-number">5.3.1</span> Tasks</h3>
+<ol type="1">
+<li><p>Calculate summary statistics (mean, median, minimum, maximum) for the variables EXP and EARNINGS</p></li>
+<li><p>Draw scatter plot of EARNINGS on EXP.</p></li>
+<li><p>Calculate the covariance and correlation between earnings and exp and comment on the values</p></li>
+<li><p>Regress EARNINGS on EXP and comment on</p>
+<ol type="1">
+<li>the sign and size of the regression coefficients</li>
+<li>the goodness of fits of the estimated model.</li>
+</ol></li>
+<li><p>Add a regression line to the scatter plot.</p></li>
+</ol>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-james23" class="csl-entry" role="listitem">
+James, Gareth, Daniela Witten, Trevor Hastie, and Rob Tibshirani. 2023. <em>An Introduction to Statistical Learning</em>. 2nd edition. Springer. <a href="https://www.statlearning.com">https://www.statlearning.com</a>.
+</div>
+<div id="ref-riegler22" class="csl-entry" role="listitem">
+Riegler, Robert. 2022. <span>“R Workbook - Guidance for Worksheets.”</span> Aston University.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./importing-data-into-R.html" class="pagination-link" aria-label="Importing Data into R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data into R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
