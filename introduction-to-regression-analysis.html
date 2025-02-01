@@ -259,7 +259,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multiple-regression-and-diagnostic-checks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Multiple Regression and Diagnostic Checks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -562,7 +562,7 @@ F-statistic: 218.4 on 1 and 44 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
-To aggregate data: take(mtcars, mean_mpg = mean(mpg), by = am)</code></pre>
+To aggregate several columns with one summary: take(mtcars, mpg, hp, fun = mean, by = am)</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>wage2 <span class="ot">&lt;-</span> <span class="fu">apply_labels</span>(wage2, </span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">educ =</span> <span class="st">"years of schooling"</span>, </span>
@@ -1712,8 +1712,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./multiple-regression-and-diagnostic-checks.html" class="pagination-link" aria-label="Introduction to Regression Analysis">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./multiple-regression-and-diagnostic-checks.html" class="pagination-link" aria-label="Multiple Regression and Diagnostic Checks">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Multiple Regression and Diagnostic Checks</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
