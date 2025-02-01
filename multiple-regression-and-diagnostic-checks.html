@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Mehtap Hisarciklilar">
-<meta name="dcterms.date" content="2025-01-20">
 
-<title>R-workshops</title>
+<title>6&nbsp; Multiple Regression and Diagnostic Checks – R-workshops</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro.html" rel="next">
+<link href="./references.html" rel="next">
+<link href="./introduction-to-regression-analysis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./multiple-regression-and-diagnostic-checks.html">Seminar 3 (4 February 2025)</a></li><li class="breadcrumb-item"><a href="./multiple-regression-and-diagnostic-checks.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Multiple Regression and Diagnostic Checks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -109,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome!</span></a>
   </div>
 </li>
@@ -176,8 +209,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multiple-regression-and-diagnostic-checks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></span></a>
+  <a href="./multiple-regression-and-diagnostic-checks.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Multiple Regression and Diagnostic Checks</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -198,35 +231,32 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a></li>
+  <li><a href="#example-wage-data" id="toc-example-wage-data" class="nav-link active" data-scroll-target="#example-wage-data"><span class="header-section-number">6.1</span> Example: wage data</a>
+  <ul class="collapse">
+  <li><a href="#task-1" id="toc-task-1" class="nav-link" data-scroll-target="#task-1"><span class="header-section-number">6.1.1</span> Task 1</a></li>
+  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2"><span class="header-section-number">6.1.2</span> Task 2</a></li>
+  <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3"><span class="header-section-number">6.1.3</span> Task 3</a></li>
+  <li><a href="#task-4" id="toc-task-4" class="nav-link" data-scroll-target="#task-4"><span class="header-section-number">6.1.4</span> Task 4</a></li>
+  <li><a href="#task-5-1" id="toc-task-5-1" class="nav-link" data-scroll-target="#task-5-1"><span class="header-section-number">6.1.5</span> Task 5</a></li>
+  <li><a href="#task-6-1" id="toc-task-6-1" class="nav-link" data-scroll-target="#task-6-1"><span class="header-section-number">6.1.6</span> Task 6</a></li>
+  <li><a href="#task-7-1" id="toc-task-7-1" class="nav-link" data-scroll-target="#task-7-1"><span class="header-section-number">6.1.7</span> Task 7</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./multiple-regression-and-diagnostic-checks.html">Seminar 3 (4 February 2025)</a></li><li class="breadcrumb-item"><a href="./multiple-regression-and-diagnostic-checks.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Multiple Regression and Diagnostic Checks</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">R-workshops</h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Multiple Regression and Diagnostic Checks</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Mehtap Hisarciklilar </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 20, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -236,15 +266,219 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="example-wage-data" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="example-wage-data"><span class="header-section-number">6.1</span> Example: wage data</h2>
+<p>We will use the wage2 data set, which is already saved in <code>Rdata</code> format.</p>
+<section id="task-1" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="task-1"><span class="header-section-number">6.1.1</span> Task 1</h3>
+<p>Open <code>wage2.Rdata</code> (if it is not already open). You may so this through the menu or the command line using the <code>load()</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"~/Desktop/R-workshops/assets/data/wage2.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="task-2" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="task-2"><span class="header-section-number">6.1.2</span> Task 2</h3>
+<p>Estimate a multiple regression model by regressing <code>wage</code> on <code>IQ</code>, <code>educ</code>, <code>exper</code>, <code>urban,</code> <code>married</code> and save it under name <code>model_3</code> . Display the estimation results.</p>
+<section id="guidance" class="level4" data-number="6.1.2.1">
+<h4 data-number="6.1.2.1" class="anchored" data-anchor-id="guidance"><span class="header-section-number">6.1.2.1</span> Guidance</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> IQ <span class="sc">+</span> educ <span class="sc">+</span> exper <span class="sc">+</span> urban, <span class="at">data =</span> wage2)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = wage ~ IQ + educ + exper + urban, data = wage2)
 
-<section id="welcome" class="level1 unnumbered">
-<h1 class="unnumbered">Welcome!</h1><p><img src="cover.png" title="R-workshops" class="quarto-cover-image img-fluid"></p>
-<p>This workbook is created for the seminar sessions of</p>
-<p><strong>6036ECN Further Econometrics</strong> module.</p>
-<p>It is written using Quarto on RStudio by</p>
-<p><strong>Mehtap Hisarciklilar</strong></p>
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-797.64 -229.84  -38.35  185.10 2082.22 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -628.8654   115.5135  -5.444 6.66e-08 ***
+IQ             5.0564     0.9234   5.476 5.60e-08 ***
+educ          56.0554     6.9340   8.084 1.94e-15 ***
+exper         17.7194     3.0583   5.794 9.41e-09 ***
+urban        159.9813    26.5107   6.035 2.30e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 363.9 on 930 degrees of freedom
+Multiple R-squared:  0.1936,    Adjusted R-squared:  0.1901 
+F-statistic: 55.81 on 4 and 930 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="task-3" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="task-3"><span class="header-section-number">6.1.3</span> Task 3</h3>
+<section id="task" class="level4" data-number="6.1.3.1">
+<h4 data-number="6.1.3.1" class="anchored" data-anchor-id="task"><span class="header-section-number">6.1.3.1</span> Task</h4>
+<p>Test for the normality of the residuals</p>
+</section>
+<section id="guidance-1" class="level4" data-number="6.1.3.2">
+<h4 data-number="6.1.3.2" class="anchored" data-anchor-id="guidance-1"><span class="header-section-number">6.1.3.2</span> Guidance</h4>
+<p>We will be using the Jarque-Bera test for this purpose.</p>
+<p>We first save the residuals from <code>model_3</code> .</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>wage2<span class="sc">$</span>resid_m3 <span class="ot">&lt;-</span> <span class="fu">residuals</span>(model_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Plot the residuals to see the distribution. Please note that is not a part of the test but visualisation helps us to understand the data better.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage2, <span class="fu">aes</span>(<span class="at">x =</span> resid_m3)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">200</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Residuals (model_3)"</span>, <span class="at">x =</span> <span class="st">"Residuals"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="multiple-regression-and-diagnostic-checks_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong><code>aes(x = resid)</code></strong> specifies the residuals as the variable for the x-axis.</li>
+<li><strong><code>geom_histogram()</code></strong> is used to create the histogram:
+<ul>
+<li><strong><code>binwidth = 200</code></strong> controls the width of the bins. You can adjust this depending on how detailed you want the histogram to be.</li>
+<li><strong><code>fill</code></strong> sets the color inside the bars, and <strong><code>color</code></strong> adds a border around them for better visibility.</li>
+</ul></li>
+<li><strong><code>labs()</code></strong> adds labels for the title and axes.</li>
+<li><strong><code>theme_minimal()</code></strong> gives a clean, simple look to the plot - try the plot with and without this.</li>
+</ul>
+<p>You may also let <code>ggplot</code> choose the number of bins automatically:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wage2, <span class="fu">aes</span>(<span class="at">x =</span> resid_m3)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"pink"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Residuals (model_3)"</span>, <span class="at">x =</span> <span class="st">"Residuals"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="multiple-regression-and-diagnostic-checks_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We may use <code>jarque.bera.test</code> for the normality test. It is in the <code>tseries</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tseries")</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jarque.bera.test</span>(wage2<span class="sc">$</span>resid_m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Jarque Bera Test
+
+data:  wage2$resid_m3
+X-squared = 699.59, df = 2, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>The p-value of the test is almost zero. We reject the null hypothesis of normal distribution. The residuals from model_3 are <strong>not</strong> normally distributed.</p>
+</section>
+</section>
+<section id="task-4" class="level3" data-number="6.1.4">
+<h3 data-number="6.1.4" class="anchored" data-anchor-id="task-4"><span class="header-section-number">6.1.4</span> Task 4</h3>
+<section id="task-5" class="level4" data-number="6.1.4.1">
+<h4 data-number="6.1.4.1" class="anchored" data-anchor-id="task-5"><span class="header-section-number">6.1.4.1</span> Task</h4>
+<p>Test for the functional form.</p>
+</section>
+<section id="guidance-2" class="level4" data-number="6.1.4.2">
+<h4 data-number="6.1.4.2" class="anchored" data-anchor-id="guidance-2"><span class="header-section-number">6.1.4.2</span> Guidance</h4>
+<p>We may use this to check whether there are any omitted variables or non-linearity in the model. The test is Ramsey RESET.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: zoo</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'zoo'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    as.Date, as.Date.numeric</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resettest</span>(model_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    RESET test
+
+data:  model_3
+RESET = 3.8665, df1 = 2, df2 = 928, p-value = 0.02127</code></pre>
+</div>
+</div>
+<p>The default <code>resettest</code> includes second and third powers of the fitted values in the test regression. You may change this using the <code>power</code> option. Below we include from second to the fourth power of fitted values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resettest</span>(model_3, <span class="at">power =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    RESET test
+
+data:  model_3
+RESET = 2.8504, df1 = 3, df2 = 927, p-value = 0.03646</code></pre>
+</div>
+</div>
+<p>The decision depends on the chosen significance level. We reject the null hypothesis of correct functional form if we choose a 5% significance level.</p>
+</section>
+</section>
+<section id="task-5-1" class="level3" data-number="6.1.5">
+<h3 data-number="6.1.5" class="anchored" data-anchor-id="task-5-1"><span class="header-section-number">6.1.5</span> Task 5</h3>
+<section id="task-6" class="level4" data-number="6.1.5.1">
+<h4 data-number="6.1.5.1" class="anchored" data-anchor-id="task-6"><span class="header-section-number">6.1.5.1</span> Task</h4>
+<p>Test for heteroscedasticity.</p>
+</section>
+<section id="guidance-3" class="level4" data-number="6.1.5.2">
+<h4 data-number="6.1.5.2" class="anchored" data-anchor-id="guidance-3"><span class="header-section-number">6.1.5.2</span> Guidance</h4>
+<p>We apply Breusch-Pagan heteroscedasticity test.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(model_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  model_3
+BP = 16.355, df = 4, p-value = 0.002578</code></pre>
+</div>
+</div>
+<p>The p-value is smaller than 0.05. Hence, we reject the null of no heteroscedasticity at 5% significance level. There is heteroscedasticity.</p>
+</section>
+</section>
+<section id="task-6-1" class="level3" data-number="6.1.6">
+<h3 data-number="6.1.6" class="anchored" data-anchor-id="task-6-1"><span class="header-section-number">6.1.6</span> Task 6</h3>
+<section id="task-7" class="level4" data-number="6.1.6.1">
+<h4 data-number="6.1.6.1" class="anchored" data-anchor-id="task-7"><span class="header-section-number">6.1.6.1</span> Task</h4>
+<p>Test for autocorrelation in the model</p>
+</section>
+<section id="guidance-4" class="level4" data-number="6.1.6.2">
+<h4 data-number="6.1.6.2" class="anchored" data-anchor-id="guidance-4"><span class="header-section-number">6.1.6.2</span> Guidance</h4>
+<p>This is a trick question! Autocorrelation problem is related to time series data whereas we have cross-section data here. Autocorrelation problem is irrelevant here.</p>
+</section>
+</section>
+<section id="task-7-1" class="level3" data-number="6.1.7">
+<h3 data-number="6.1.7" class="anchored" data-anchor-id="task-7-1"><span class="header-section-number">6.1.7</span> Task 7</h3>
+<section id="task-8" class="level4" data-number="6.1.7.1">
+<h4 data-number="6.1.7.1" class="anchored" data-anchor-id="task-8"><span class="header-section-number">6.1.7.1</span> Task</h4>
+<p>Replicate the above using logarithmic wages. Has there been a change in model diagnostics? Which form do you prefer to use for inference?</p>
+</section>
+<section id="guidance-5" class="level4" data-number="6.1.7.2">
+<h4 data-number="6.1.7.2" class="anchored" data-anchor-id="guidance-5"><span class="header-section-number">6.1.7.2</span> Guidance</h4>
+<p>You may use the script file to copy-paste all the code and make the minor changes (i.e.&nbsp;replacement of <code>wage</code> with <code>ln_wage</code>).</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -670,10 +904,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./introduction-to-regression-analysis.html" class="pagination-link" aria-label="Introduction to Regression Analysis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro.html" class="pagination-link" aria-label="Introduction to R">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
