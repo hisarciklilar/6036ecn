@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Data Management in R – R-workshops</title>
+<title>8&nbsp; Unit Root and Cointegration – R-workshops</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,8 +84,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./importing-data-into-R.html" rel="next">
-<link href="./basics-of-R.html" rel="prev">
+<link href="./introduction-to-time-series-analysis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -135,7 +134,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-management-in-R.html">Seminar 2 (28 January 2025)</a></li><li class="breadcrumb-item"><a href="./data-management-in-R.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management in R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./non-stationarity.html">Seminar 5 (18 February 2025)</a></li><li class="breadcrumb-item"><a href="./non-stationarity.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unit Root and Cointegration</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -200,7 +199,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-management-in-R.html" class="sidebar-item-text sidebar-link active">
+  <a href="./data-management-in-R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management in R</span></span></a>
   </div>
 </li>
@@ -269,7 +268,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./non-stationarity.html" class="sidebar-item-text sidebar-link">
+  <a href="./non-stationarity.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unit Root and Cointegration</span></span></a>
   </div>
 </li>
@@ -285,21 +284,19 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#packages-and-libraries" id="toc-packages-and-libraries" class="nav-link active" data-scroll-target="#packages-and-libraries"><span class="header-section-number">3.1</span> Packages and libraries</a></li>
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">3.2</span> Functions</a>
+  <li><a href="#unit-root-non-stationary-time-series" id="toc-unit-root-non-stationary-time-series" class="nav-link active" data-scroll-target="#unit-root-non-stationary-time-series"><span class="header-section-number">8.1</span> Unit Root (Non-stationary Time Series)</a>
   <ul class="collapse">
-  <li><a href="#basic-functions" id="toc-basic-functions" class="nav-link" data-scroll-target="#basic-functions"><span class="header-section-number">3.2.1</span> Basic Functions</a></li>
+  <li><a href="#example-pepper-price" id="toc-example-pepper-price" class="nav-link" data-scroll-target="#example-pepper-price"><span class="header-section-number">8.1.1</span> Example: Pepper Price</a></li>
   </ul></li>
-  <li><a href="#scripts" id="toc-scripts" class="nav-link" data-scroll-target="#scripts"><span class="header-section-number">3.3</span> Scripts</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-management-in-R.html">Seminar 2 (28 January 2025)</a></li><li class="breadcrumb-item"><a href="./data-management-in-R.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management in R</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./non-stationarity.html">Seminar 5 (18 February 2025)</a></li><li class="breadcrumb-item"><a href="./non-stationarity.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unit Root and Cointegration</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management in R</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unit Root and Cointegration</span></h1>
 </div>
 
 
@@ -316,179 +313,120 @@ div.csl-indent {
 </header>
 
 
-<section id="packages-and-libraries" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="packages-and-libraries"><span class="header-section-number">3.1</span> Packages and libraries</h2>
-<p>In order to access specialised data analysis tools in R, we will need to install some R packages.</p>
-<p>“An R <strong>package</strong> is a collection of functions, data, and documentation that extends the capabilities of base R. Using packages is key to the successful use of R.” <span class="citation" data-cites="wickham">(<a href="references.html#ref-wickham" role="doc-biblioref">Wickham, Cetinkaya-Rundel, and Grolemund, n.d.</a>)</span></p>
-<p>We will start by installing the <code>tidyverse</code> package</p>
+<section id="unit-root-non-stationary-time-series" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="unit-root-non-stationary-time-series"><span class="header-section-number">8.1</span> Unit Root (Non-stationary Time Series)</h2>
+<section id="example-pepper-price" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="example-pepper-price"><span class="header-section-number">8.1.1</span> Example: Pepper Price</h3>
+<p>The Pepper Price example provided in this section is taken from <span class="citation" data-cites="kleiber08">(<a href="references.html#ref-kleiber08" role="doc-biblioref">Kleiber and Zeileis 2008</a>)</span>.</p>
+<p>We start by loading the required libraries.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidyverse")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER) <span class="co"># Applied Econometrics with R, Kleiber and Zeileis, 2008</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: car</code></pre>
 </div>
-<p>To install <code>tidyverse</code>, type the above line of code in the console, and then press enter to run it. R will download the packages from CRAN and install them on to your computer.</p>
-<p>Once installed, you may use this package after loading it with the <code>library()</code> function.</p>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lmtest</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: zoo</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'zoo'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    as.Date, as.Date.numeric</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: sandwich</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: survival</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries) <span class="co">#Required for the adf test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo </code></pre>
+</div>
+</div>
+<p>Load Pepper Price time series data and check the first 6 rows of observations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(tidyverse)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"PepperPrice"</span>) </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(PepperPrice) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        black   white
+[1,]  884.050 1419.78
+[2,]  919.329 1503.55
+[3,]  930.350 1536.62
+[4,] 1102.310 1629.22
+[5,] 1150.810 1737.24
+[6,] 1093.490 1629.22</code></pre>
 </div>
-<p>You see above a list of packages that come with <code>tidyverse</code>.</p>
-<p>You may update <code>tidyverse</code> by running</p>
+</div>
+<p>There are two series here: black pepper and white pepper. Let’s understand the time series components better:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#tidyverse_update()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tsp stands for "Time Series Properties"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tsp</span>(PepperPrice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1973.75 1996.25   12.00</code></pre>
 </div>
-</section>
-<section id="functions" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="functions"><span class="header-section-number">3.2</span> Functions</h2>
-<p>You may identify functions with the <code>()</code> after the function name. For example, <code>ls()</code> that we used above.</p>
-<p>Functions may also take <em>arguments</em>. The data that we pass into the function is called the function’s <em>argument</em>. The argument can be raw data, an R object, or even the results of another R function.</p>
+</div>
+<p><code>tsp</code> above stands for time series properties. It seems like we have monthly data (frequency of 12), starting in year 1973 and ending in year 1996.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># round a number</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">4.5218</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">window</span>(PepperPrice, <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">1974</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
+<pre><code>            black   white
+Oct 1973  884.050 1419.78
+Nov 1973  919.329 1503.55
+Dec 1973  930.350 1536.62
+Jan 1974 1102.310 1629.22
+Feb 1974 1150.810 1737.24
+Mar 1974 1093.490 1629.22
+Apr 1974 1117.740 1620.40
+May 1974 1168.450 1671.11
+Jun 1974 1117.740 1578.51</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 5</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the factorial</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">factorial</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 6</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the mean of values from 1 to 6:</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.5</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.5</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Many R functions take multiple arguments that help them do their job. You can give a function as many arguments as you like as long as you separate each argument with a comma.</p>
-<p>To see which arguments a function can take, you may type <code>args</code> in parenthesis after function name:</p>
+<p>Let us start by plotting the data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(round)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>function (x, digits = 0, ...) 
-NULL</code></pre>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(PepperPrice, <span class="at">plot.type =</span> <span class="st">"single"</span>, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"white"</span>), <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="non-stationarity_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## function (x, digits = 0) </span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">## NULL</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.1415</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.14</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## 3.14</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="basic-functions" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="basic-functions"><span class="header-section-number">3.2.1</span> Basic Functions</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;"><strong>Function</strong></th>
-<th style="text-align: left;"><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>?()</strong> or <strong>help()</strong></td>
-<td style="text-align: left;">Access the documentation and help file for a particular function</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>install.packages()</strong></td>
-<td style="text-align: left;">Download and install an R package</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>library()</strong></td>
-<td style="text-align: left;">Loads an R package into the working environment</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>setwd()</strong></td>
-<td style="text-align: left;">Set the working directory</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>getwd()</strong></td>
-<td style="text-align: left;">Get the working directory</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>c()</strong></td>
-<td style="text-align: left;">Create a vector</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>as.numeric()</strong></td>
-<td style="text-align: left;">Converts an object to a numeric vector</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>as.logical()</strong></td>
-<td style="text-align: left;">Converts an object to a logical vector</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>as.character()</strong></td>
-<td style="text-align: left;">Converts and object to a character vector</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>mode()</strong></td>
-<td style="text-align: left;">Returns the type of the object</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>sum()</strong></td>
-<td style="text-align: left;">Returns the sum of all input values</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>length()</strong></td>
-<td style="text-align: left;">Returns the lenght of the obejct</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>mean()</strong></td>
-<td style="text-align: left;">Returns the arithmetic mean of the vector</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>median()</strong></td>
-<td style="text-align: left;">Returns the median of the vector</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>sample()</strong></td>
-<td style="text-align: left;">Returns a specificed size of elements from the object</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>replicate()</strong></td>
-<td style="text-align: left;">Repeats an expression a specific number of times</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>hist()</strong></td>
-<td style="text-align: left;">Creates a histogram of given data values</td>
-</tr>
-</tbody>
-</table>
-</section>
-</section>
-<section id="scripts" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="scripts"><span class="header-section-number">3.3</span> Scripts</h2>
-<p>You can create a draft of your code as you go by using an R <em>script</em>. An R script is just a plain text file that you save R code in. You can open an R script in RStudio using the menu bar:</p>
-<p><em>File –&gt; New File –&gt; R Script</em></p>
-<p>We will write and edit R code in a script. This will help create a reproducible record of your work. When you’re finished for the day, you can save your script and then use it to rerun your entire analysis the next day.</p>
-<p>To save a script, click the scripts pane, and then go to <em>File –&gt; Save As</em> in the menu bar.</p>
 <ul>
-<li><p>You can automatically execute a line of code in a script by clicking the Run button on the top right of the pane. R will run whichever line of code your cursor is on.</p></li>
-<li><p>If you have a whole section highlighted, R will run the highlighted code.</p></li>
-<li><p>You can run the entire script by clicking the Source button.</p></li>
-<li><p>You can use Control + Return in your keyboard as a shortcut for the Run button. On Macs, that would be Command + Return.</p></li>
+<li><code>plot(PepperPrice, ...)</code> is the base R plot function for time series objects.</li>
+<li><code>plot.type = "single"</code> ensures that multiple time series within <code>PepperPrice</code> are plotted on the same graph (rather than separate subplots).</li>
+<li><code>col = 1:2</code> assigns different colors to the time series (we use R defaults above)</li>
 </ul>
+<p>The second line after <code>plot</code> is about legend.</p>
+<ul>
+<li><code>legend("topleft", ...)</code> places the legend in the top-left corner of the plot.</li>
+<li><code>c("black", "white")</code> are the legend labels for the two time series.</li>
+<li><code>bty = "n"</code> removes the legend box (makes it look cleaner).</li>
+<li><code>col = 1:2</code> matches the line colors (black and red).</li>
+<li><code>lty = rep(1,2)</code> sets line type to solid (<code>lty = 1</code>) for both series.</li>
+</ul>
+<p><strong><em>to be continued</em></strong></p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-wickham" class="csl-entry" role="listitem">
-Wickham, Hadley, Mine Cetinkaya-Rundel, and Garrett Grolemund. n.d. <em>R for Data Science</em>. 2nd edition. O’Reilly. <a href="https://r4ds.hadley.nz/preface-2e">https://r4ds.hadley.nz/preface-2e</a>.
+<div id="ref-kleiber08" class="csl-entry" role="listitem">
+Kleiber, C., and A. Zeileis. 2008. <em>Applied Econometrics with r</em>. Springer.
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -914,14 +852,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./basics-of-R.html" class="pagination-link" aria-label="Basics of R">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Basics of R</span></span>
+      <a href="./introduction-to-time-series-analysis.html" class="pagination-link" aria-label="Introduction to Time Series Analysis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Time Series Analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./importing-data-into-R.html" class="pagination-link" aria-label="Importing Data into R">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Importing Data into R</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
