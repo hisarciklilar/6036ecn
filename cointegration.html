@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Unit Root (Non-stationary Time Series): Augmented Dickerm(y-Fuller Test – R-workshops</title>
+<title>9&nbsp; Cointegration: Engle-Granger Test – R-workshops</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -54,27 +54,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -84,8 +64,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./cointegration.html" rel="next">
-<link href="./introduction-to-time-series-analysis.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./non-stationarity.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -164,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./non-stationarity.html">Seminar 5 (18 February 2025)</a></li><li class="breadcrumb-item"><a href="./non-stationarity.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unit Root (Non-stationary Time Series): Augmented Dickerm(y-Fuller Test</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./non-stationarity.html">Seminar 5 (18 February 2025)</a></li><li class="breadcrumb-item"><a href="./cointegration.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cointegration: Engle-Granger Test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -292,13 +272,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./non-stationarity.html" class="sidebar-item-text sidebar-link active">
+  <a href="./non-stationarity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unit Root (Non-stationary Time Series): Augmented Dickerm(y-Fuller Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cointegration.html" class="sidebar-item-text sidebar-link">
+  <a href="./cointegration.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cointegration: Engle-Granger Test</span></span></a>
   </div>
 </li>
@@ -331,14 +311,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#example-pepper-price" id="toc-example-pepper-price" class="nav-link active" data-scroll-target="#example-pepper-price"><span class="header-section-number">8.1</span> Example: Pepper Price</a>
+  <li><a href="#example-pepper-price" id="toc-example-pepper-price" class="nav-link active" data-scroll-target="#example-pepper-price"><span class="header-section-number">9.1</span> Example: Pepper Price</a>
   <ul class="collapse">
-  <li><a href="#task-1" id="toc-task-1" class="nav-link" data-scroll-target="#task-1"><span class="header-section-number">8.1.1</span> Task 1</a></li>
-  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2"><span class="header-section-number">8.1.2</span> Task 2</a></li>
-  <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3"><span class="header-section-number">8.1.3</span> Task 3</a></li>
-  <li><a href="#task-4" id="toc-task-4" class="nav-link" data-scroll-target="#task-4"><span class="header-section-number">8.1.4</span> Task 4</a></li>
-  <li><a href="#task-5" id="toc-task-5" class="nav-link" data-scroll-target="#task-5"><span class="header-section-number">8.1.5</span> Task 5</a></li>
-  <li><a href="#task-6" id="toc-task-6" class="nav-link" data-scroll-target="#task-6"><span class="header-section-number">8.1.6</span> Task 6</a></li>
+  <li><a href="#task-1" id="toc-task-1" class="nav-link" data-scroll-target="#task-1"><span class="header-section-number">9.1.1</span> Task 1</a></li>
+  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2"><span class="header-section-number">9.1.2</span> Task 2</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -346,9 +322,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./non-stationarity.html">Seminar 5 (18 February 2025)</a></li><li class="breadcrumb-item"><a href="./non-stationarity.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unit Root (Non-stationary Time Series): Augmented Dickerm(y-Fuller Test</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./non-stationarity.html">Seminar 5 (18 February 2025)</a></li><li class="breadcrumb-item"><a href="./cointegration.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cointegration: Engle-Granger Test</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unit Root (Non-stationary Time Series): Augmented Dickerm(y-Fuller Test</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cointegration: Engle-Granger Test</span></h1>
 </div>
 
 
@@ -365,12 +341,8 @@ window.Quarto = {
 </header>
 
 
-<section id="example-pepper-price" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="example-pepper-price"><span class="header-section-number">8.1</span> Example: Pepper Price</h2>
-<p>The Pepper Price example provided in this section is taken from <span class="citation" data-cites="kleiber08">(<a href="references.html#ref-kleiber08" role="doc-biblioref">Kleiber and Zeileis 2008</a>)</span>.</p>
-<p>We start by loading the required libraries.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER) <span class="co"># Applied Econometrics with R, Kleiber and Zeileis, 2008</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: car</code></pre>
 </div>
@@ -398,13 +370,13 @@ Attaching package: 'zoo'</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: survival</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries) <span class="co">#Required for the adf test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Registered S3 method overwritten by 'quantmod':
   method            from
   as.zoo.data.frame zoo </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vars) <span class="co"># to select optimal lag length</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: MASS</code></pre>
 </div>
@@ -416,313 +388,125 @@ Attaching package: 'zoo'</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(urca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Load Pepper Price time series data and check the first 6 rows of observations.</p>
+<section id="example-pepper-price" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="example-pepper-price"><span class="header-section-number">9.1</span> Example: Pepper Price</h2>
+<p>We continue from the previous section, where we found that the white and black pepper prices are <span class="math inline">\(I(1)\)</span>.</p>
+<p>In this section, we test whether they have a cointegrating relationship.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"PepperPrice"</span>) </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(PepperPrice) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        black   white
-[1,]  884.050 1419.78
-[2,]  919.329 1503.55
-[3,]  930.350 1536.62
-[4,] 1102.310 1629.22
-[5,] 1150.810 1737.24
-[6,] 1093.490 1629.22</code></pre>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"PepperPrice"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(PepperPrice) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"black_pepper"</span>, <span class="st">"white_pepper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>There are two series here: black pepper and white pepper. Let’s understand the time series components better:</p>
+<section id="task-1" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="task-1"><span class="header-section-number">9.1.1</span> Task 1</h3>
+<p>Regress <code>white_pepper</code> on <code>black_pepper</code> and obtain the residuals.</p>
+<section id="guidance" class="level4" data-number="9.1.1.1">
+<h4 data-number="9.1.1.1" class="anchored" data-anchor-id="guidance"><span class="header-section-number">9.1.1.1</span> Guidance</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tsp stands for "Time Series Properties"</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tsp</span>(PepperPrice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1973.75 1996.25   12.00</code></pre>
-</div>
-</div>
-<p><code>tsp</code> above stands for time series properties. It seems like we have monthly data (frequency of 12), starting in year 1973 and ending in year 1996.</p>
-<p>We can use the <code>window()</code> function to inspect the values of the variables by setting start and end dates. In the example below, we start from the start of the sample and display values up until the 6th data point of 1974.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">window</span>(PepperPrice, <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">1974</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            black   white
-Oct 1973  884.050 1419.78
-Nov 1973  919.329 1503.55
-Dec 1973  930.350 1536.62
-Jan 1974 1102.310 1629.22
-Feb 1974 1150.810 1737.24
-Mar 1974 1093.490 1629.22
-Apr 1974 1117.740 1620.40
-May 1974 1168.450 1671.11
-Jun 1974 1117.740 1578.51</code></pre>
-</div>
-</div>
-<section id="task-1" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="task-1"><span class="header-section-number">8.1.1</span> Task 1</h3>
-<p>Change the names of the variables <code>black</code> and <code>white</code> to <code>black_pepper</code> and <code>white_pepper</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(PepperPrice) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"black_pepper"</span>, <span class="st">"white_pepper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="task-2" class="level3" data-number="8.1.2">
-<h3 data-number="8.1.2" class="anchored" data-anchor-id="task-2"><span class="header-section-number">8.1.2</span> Task 2</h3>
-<p>Provide a time-series plot of the <code>white_pepper</code> and <code>black_pepper</code> prices.</p>
-<p>Let us start by plotting the data:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(PepperPrice, <span class="at">plot.type =</span> <span class="st">"single"</span>, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="fu">c</span>(<span class="st">"black_pepper"</span>, <span class="st">"white_pepper"</span>), </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="non-stationarity_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<ul>
-<li><code>plot(PepperPrice, ...)</code> is the base R plot function for time series objects.</li>
-<li><code>plot.type = "single"</code> ensures that multiple time series within <code>PepperPrice</code> are plotted on the same graph (rather than separate subplots).</li>
-<li><code>col = 1:2</code> assigns different colors to the time series (we use R defaults above)</li>
-</ul>
-<p>The second line after <code>plot</code> is about legend.</p>
-<ul>
-<li><code>legend("topleft", ...)</code> places the legend in the top-left corner of the plot.</li>
-<li><code>c("black", "white")</code> are the legend labels for the two time series.</li>
-<li><code>bty = "n"</code> removes the legend box (makes it look cleaner).</li>
-<li><code>col = 1:2</code> matches the line colors (black and red).</li>
-<li><code>lty = rep(1,2)</code> sets line type to solid (<code>lty = 1</code>) for both series.</li>
-</ul>
-</section>
-<section id="task-3" class="level3" data-number="8.1.3">
-<h3 data-number="8.1.3" class="anchored" data-anchor-id="task-3"><span class="header-section-number">8.1.3</span> Task 3</h3>
-<p>Find the order of integration of <code>white_pepper</code> and <code>black_pepper</code> prices.</p>
-<section id="guidance" class="level4" data-number="8.1.3.1">
-<h4 data-number="8.1.3.1" class="anchored" data-anchor-id="guidance"><span class="header-section-number">8.1.3.1</span> Guidance</h4>
-<p>Apply Dickey Fuller test without trend in test regression</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(PepperPrice[, <span class="st">"white_pepper"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Augmented Dickey-Fuller Test
-
-data:  PepperPrice[, "white_pepper"]
-Dickey-Fuller = -1.6001, Lag order = 6, p-value = 0.7444
-alternative hypothesis: stationary</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regression of white_pepper on black_pepper</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>m_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(white_pepper <span class="sc">~</span> black_pepper, <span class="fu">as.data.frame</span>(PepperPrice))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(PepperPrice[, <span class="st">"black_pepper"</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Augmented Dickey-Fuller Test
-
-data:  PepperPrice[, "black_pepper"]
-Dickey-Fuller = -1.6434, Lag order = 6, p-value = 0.7262
-alternative hypothesis: stationary</code></pre>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain residuals</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>resid_m1 <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>We cannot reject the null hypothesis of unit root.</p>
-<p>Let us apply Augmented Dickey-Fuller (ADF) Test with 12 lags (because of the monthly frequency of the data, it likely to observe Autocorrelation up to 12 lags). Here, we have selected the lag length with some intuition. We will use another R command to choose the optimum lag length with the help of AIC (Akaike Information Criterion).</p>
+<p>We need to perform a unit root test on the residuals. But the test regression should not include a constant term. The <code>adf.test()</code> function we used above does not have an option to remove the constant from test regression. Hence, we revert to <code>urca</code> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(PepperPrice[, <span class="st">"white_pepper"</span>], <span class="at">k =</span> <span class="dv">12</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Augmented Dickey-Fuller Test
-
-data:  PepperPrice[, "white_pepper"]
-Dickey-Fuller = -2.5763, Lag order = 12, p-value = 0.3332
-alternative hypothesis: stationary</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(PepperPrice[, <span class="st">"black_pepper"</span>], <span class="at">k =</span> <span class="dv">12</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Augmented Dickey-Fuller Test
-
-data:  PepperPrice[, "black_pepper"]
-Dickey-Fuller = -2.3677, Lag order = 12, p-value = 0.4211
-alternative hypothesis: stationary</code></pre>
-</div>
-</div>
-<p>Both series are still with a unit root. They are non-stationary.</p>
-<p>Since the plots did not show a clear deterministic trend, we can proceed by differencing. We re-apply the Augmented Dickey-Fuller Test on the first diffrenced series.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(<span class="fu">diff</span>(PepperPrice[, <span class="st">"white_pepper"</span>])) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in adf.test(diff(PepperPrice[, "white_pepper"])): p-value smaller than
-printed p-value</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Augmented Dickey-Fuller Test
-
-data:  diff(PepperPrice[, "white_pepper"])
-Dickey-Fuller = -5.8575, Lag order = 6, p-value = 0.01
-alternative hypothesis: stationary</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(<span class="fu">diff</span>(PepperPrice[, <span class="st">"black_pepper"</span>])) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in adf.test(diff(PepperPrice[, "black_pepper"])): p-value smaller than
-printed p-value</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Augmented Dickey-Fuller Test
-
-data:  diff(PepperPrice[, "black_pepper"])
-Dickey-Fuller = -4.973, Lag order = 6, p-value = 0.01
-alternative hypothesis: stationary</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="task-4" class="level3" data-number="8.1.4">
-<h3 data-number="8.1.4" class="anchored" data-anchor-id="task-4"><span class="header-section-number">8.1.4</span> Task 4</h3>
-<p>Plot the first differenced series</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first differenced white pepper price</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">diff</span>(PepperPrice[, <span class="st">"white_pepper"</span>]), </span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Year"</span>, <span class="at">ylab =</span> <span class="st">"First difference of Price"</span>, <span class="at">main =</span> <span class="st">"First-differenced White Pepper Prices"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="non-stationarity_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first differenced black pepper price</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">diff</span>(PepperPrice[, <span class="st">"black_pepper"</span>]), </span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Year"</span>, <span class="at">ylab =</span> <span class="st">"First difference of Price"</span>, <span class="at">main =</span> <span class="st">"First-differenced Black Pepper Prices"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="non-stationarity_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>We can also see from the above plots that the first differenced series are stationary.</p>
-</section>
-<section id="task-5" class="level3" data-number="8.1.5">
-<h3 data-number="8.1.5" class="anchored" data-anchor-id="task-5"><span class="header-section-number">8.1.5</span> Task 5</h3>
-<p>Re-apply the ADF test by choosing the optimum lag length using AIC (Akaike Information Criterion). Set a maximum of 12 lags.</p>
-<section id="guidance-1" class="level4" data-number="8.1.5.1">
-<h4 data-number="8.1.5.1" class="anchored" data-anchor-id="guidance-1"><span class="header-section-number">8.1.5.1</span> Guidance</h4>
-<p>We use the <code>vars</code> R package to find the optimum lag length for our ADF test.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>lag_selection <span class="ot">&lt;-</span> <span class="fu">VARselect</span>(PepperPrice[, <span class="st">"white_pepper"</span>], <span class="at">lag.max =</span> <span class="dv">12</span>, <span class="at">type =</span> <span class="st">"const"</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print the results</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(lag_selection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$selection
-AIC(n)  HQ(n)  SC(n) FPE(n) 
-    12      2      2     12 
-
-$criteria
-                 1           2           3           4           5           6
-AIC(n)    10.88957    10.80854    10.81078    10.81678    10.82324    10.82629
-HQ(n)     10.90061    10.82510    10.83286    10.84439    10.85637    10.86494
-SC(n)     10.91704    10.84973    10.86571    10.88544    10.90564    10.92242
-FPE(n) 53614.21642 49441.05649 49552.12848 49850.44270 50174.03385 50327.43278
-                 7           8           9          10          11          12
-AIC(n)    10.81944    10.82684    10.81711    10.79352    10.79293    10.78408
-HQ(n)     10.86362    10.87654    10.87233    10.85425    10.85919    10.85586
-SC(n)     10.92931    10.95044    10.95444    10.94458    10.95773    10.96260
-FPE(n) 49984.31397 50355.88525 49868.81434 48706.52773 48678.78476 48250.47433</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract suggested lag from AIC criterion</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>optimum_lag <span class="ot">&lt;-</span> lag_selection<span class="sc">$</span>selection[<span class="st">"AIC(n)"</span>]</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(optimum_lag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>AIC(n) 
-    12 </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run ADF test with the selected lag</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(PepperPrice[, <span class="st">"white_pepper"</span>], <span class="at">k =</span> optimum_lag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Augmented Dickey-Fuller Test
-
-data:  PepperPrice[, "white_pepper"]
-Dickey-Fuller = -2.5763, Lag order = 12, p-value = 0.3332
-alternative hypothesis: stationary</code></pre>
-</div>
-</div>
-<p>You may replicate the above for the black pepper price and also for the first-differenced series.</p>
-<p>Also, you may replicate the above analysis using logarithmic series.</p>
-<p>The white and black pepper prices are integrated of order 1, i.e.&nbsp;they are <span class="math inline">\(I(1)\)</span>.</p>
-</section>
-</section>
-<section id="task-6" class="level3" data-number="8.1.6">
-<h3 data-number="8.1.6" class="anchored" data-anchor-id="task-6"><span class="header-section-number">8.1.6</span> Task 6</h3>
-<p>Replicate the ADF test including trend in the test regression.</p>
-<p>Please note that this test is only for exercise purposes (to show how it could be done in R).The plot of our white and pepper price series do not suggest existence of a deterministic trend. Hence, the results obtained below will not be used in the analysis further.</p>
-<section id="guidance-2" class="level4" data-number="8.1.6.1">
-<h4 data-number="8.1.6.1" class="anchored" data-anchor-id="guidance-2"><span class="header-section-number">8.1.6.1</span> Guidance</h4>
-<p>We use R’s <code>urca</code> library.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(urca)</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the ADF test with trend</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>adf_trend <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(PepperPrice[, <span class="st">"white_pepper"</span>], <span class="at">type =</span> <span class="st">"trend"</span>, <span class="at">lags =</span> <span class="dv">1</span>)</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Print test results</span></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(adf_trend)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(urca)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>adf_no_constant <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(resid_m1, <span class="at">type =</span> <span class="st">"none"</span>, <span class="at">lags =</span> <span class="dv">0</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(adf_no_constant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ############################################### 
 # Augmented Dickey-Fuller Test Unit Root Test # 
 ############################################### 
 
-Test regression trend 
+Test regression none 
 
 
 Call:
-lm(formula = z.diff ~ z.lag.1 + 1 + tt + z.diff.lag)
+lm(formula = z.diff ~ z.lag.1 - 1)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--952.60  -92.97  -18.41   65.97 1155.13 
+     Min       1Q   Median       3Q      Max 
+-1316.48   -79.12    -4.80    74.85  1087.12 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 50.491863  34.431212   1.466   0.1437    
-z.lag.1     -0.017740   0.009639  -1.841   0.0668 .  
-tt           0.043479   0.177088   0.246   0.8062    
-z.diff.lag   0.290817   0.058798   4.946 1.35e-06 ***
+        Estimate Std. Error t value Pr(&gt;|t|)    
+z.lag.1 -0.11587    0.02916  -3.973 9.11e-05 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 218.1 on 265 degrees of freedom
-Multiple R-squared:  0.09145,   Adjusted R-squared:  0.08117 
-F-statistic: 8.892 on 3 and 265 DF,  p-value: 1.235e-05
+Residual standard error: 208.1 on 269 degrees of freedom
+Multiple R-squared:  0.05543,   Adjusted R-squared:  0.05192 
+F-statistic: 15.79 on 1 and 269 DF,  p-value: 9.111e-05
 
 
-Value of test-statistic is: -1.8406 1.2023 1.7202 
+Value of test-statistic is: -3.9733 
 
 Critical values for test statistics: 
       1pct  5pct 10pct
-tau3 -3.98 -3.42 -3.13
-phi2  6.15  4.71  4.05
-phi3  8.34  6.30  5.36</code></pre>
+tau1 -2.58 -1.95 -1.62</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># type can take on: none; drift; trend</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In the next section, we will check for a cointegrating relationship between these variables.</p>
+<p>The null of unit root is rejected. Hence the residuals of model <code>m_1</code> are stationary. This implies a cointegrating relationship between <code>white_pepper</code> and <code>black_pepper</code> prices. Hence, we can use these variables and estimate a regression without the need for differencing.</p>
+</section>
+</section>
+<section id="task-2" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="task-2"><span class="header-section-number">9.1.2</span> Task 2</h3>
+<p>Estimate the Error Correction Mechanism (ECM) between the two types of pepper prices and interpret your results.</p>
+<section id="guidence" class="level4" data-number="9.1.2.1">
+<h4 data-number="9.1.2.1" class="anchored" data-anchor-id="guidence"><span class="header-section-number">9.1.2.1</span> Guidence</h4>
+<p>The ECM will be in the form of a first differenced regression of the two variables while also including the lagged error term from the regression we estimated above.</p>
+<p>First, let’s convert the residuals we obtained above to a <code>ts</code> (time-series) object while matching the dates to the <code>PepperPrice</code> object</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert residuals we obtained above to a ts object (match ts object PepperPrice)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>resid_m1 <span class="ot">&lt;-</span> <span class="fu">ts</span>(resid_m1, <span class="at">start =</span> <span class="fu">start</span>(PepperPrice),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">frequency =</span> <span class="fu">frequency</span>(PepperPrice))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We then create the difference and lag variables that we need for an Error Correction Mechanism:</p>
+<p><span class="math display">\[
+\Delta white\_pepper_t = \alpha_0 + \alpha_1 \Delta black\_pepper_t + \alpha_2 resid\_m1_{t-1}+\epsilon_t
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>d_white <span class="ot">&lt;-</span> <span class="fu">diff</span>(PepperPrice[, <span class="st">"white_pepper"</span>])  <span class="co"># First difference of white_pepper</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>d_black <span class="ot">&lt;-</span> <span class="fu">diff</span>(PepperPrice[, <span class="st">"black_pepper"</span>])  <span class="co"># First difference of black_pepper</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>lag_resid <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">lag</span>(resid_m1, <span class="sc">-</span><span class="dv">1</span>)  <span class="co"># Lagged residuals (one period back)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Each of the above are separate <code>ts</code> objects. we will bind them under one. I will save this as <code>PepperPrice_2</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>PepperPrice_2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(d_white, d_black, lag_resid)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(PepperPrice_2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"d_white"</span>, <span class="st">"d_black"</span>, <span class="st">"lag_resid"</span>) <span class="co"># assign column names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now run our ECM:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ecm <span class="ot">&lt;-</span> <span class="fu">lm</span>(d_white <span class="sc">~</span> d_black <span class="sc">+</span> lag_resid, <span class="at">data =</span> <span class="fu">as.data.frame</span>(PepperPrice_2)) </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ecm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = d_white ~ d_black + lag_resid, data = as.data.frame(PepperPrice_2))
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1059.66   -62.79   -15.21    61.56  1092.60 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  4.60426   11.65811   0.395    0.693    
+d_black      0.72575    0.07993   9.080  &lt; 2e-16 ***
+lag_resid   -0.12866    0.02689  -4.784 2.84e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 191.5 on 267 degrees of freedom
+  (1 observation deleted due to missingness)
+Multiple R-squared:  0.2949,    Adjusted R-squared:  0.2896 
+F-statistic: 55.83 on 2 and 267 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>In the above output, we are interested with the <code>lag_resid</code> term. The coefficient of this term needs to be negative for a valid error correction mechanism. We see that the coefficient is statistically significant and is negative. <code>-0.12866</code> shows that in the case of a deviation from the long-run equilibrium between the white pepper and black pepper prices, 12.9% of this deviation is adjusted in the next period. Here, we have monthly data, so 12.9% of the deviatiton from the long-run equilibrium is adjusted in the next month. The system appears to come back to its equilibrium state in less than a year.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-kleiber08" class="csl-entry" role="listitem">
-Kleiber, C., and A. Zeileis. 2008. <em>Applied Econometrics with r</em>. Springer.
-</div>
-</div>
 </section>
 </section>
 </section>
@@ -1150,13 +934,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./introduction-to-time-series-analysis.html" class="pagination-link" aria-label="Introduction to Time Series Analysis">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Time Series Analysis</span></span>
+      <a href="./non-stationarity.html" class="pagination-link" aria-label="Unit Root (Non-stationary Time Series): Augmented Dickerm(y-Fuller Test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unit Root (Non-stationary Time Series): Augmented Dickerm(y-Fuller Test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./cointegration.html" class="pagination-link" aria-label="Cointegration: Engle-Granger Test">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cointegration: Engle-Granger Test</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
