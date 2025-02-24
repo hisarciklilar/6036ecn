@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -64,17 +64,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./data-visualisation-ggplot2.html" rel="next">
 <link href="./non-stationarity.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626149efe8f5d16e1d391ba177679bf0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -287,12 +287,52 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">References</span></a>
+ <span class="menu-text">Seminar 6 (25 February 2025)</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-visualisation-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction-to-panel-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction to Panel Data Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar 7</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./panel-data-fixed-effects-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Panel Data: Fixed Effects Model</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">References</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -390,17 +430,25 @@ Attaching package: 'zoo'</code></pre>
 </div>
 <section id="example-pepper-price" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="example-pepper-price"><span class="header-section-number">9.1</span> Example: Pepper Price</h2>
-<p>We continue from the previous section, where we found that the white and black pepper prices are <span class="math inline">\(I(1)\)</span>.</p>
+<p>We continue from the previous section, where we concluded that the white and black pepper prices are <span class="math inline">\(I(1)\)</span>.</p>
 <p>In this section, we test whether they have a cointegrating relationship.</p>
+<p>&lt;div style=“color:green&gt;</p>
+<p>There are two conditions for cointegration:</p>
+<ol type="1">
+<li>The time-series should be integrated of the same order</li>
+<li>There is a stationary linear relationship between the variables.</li>
+</ol>
+<p>In the previous section, we established that the series are integrated of the same order. The next task finds out whether they have a stationary linear relationship.</p>
+</section></main></div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"PepperPrice"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(PepperPrice) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"black_pepper"</span>, <span class="st">"white_pepper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="task-1" class="level3" data-number="9.1.1">
-<h3 data-number="9.1.1" class="anchored" data-anchor-id="task-1"><span class="header-section-number">9.1.1</span> Task 1</h3>
+<h3 data-number="9.1.1" data-anchor-id="task-1"><span class="header-section-number">9.1.1</span> Task 1</h3>
 <p>Regress <code>white_pepper</code> on <code>black_pepper</code> and obtain the residuals.</p>
 <section id="guidance" class="level4" data-number="9.1.1.1">
-<h4 data-number="9.1.1.1" class="anchored" data-anchor-id="guidance"><span class="header-section-number">9.1.1.1</span> Guidance</h4>
+<h4 data-number="9.1.1.1" data-anchor-id="guidance"><span class="header-section-number">9.1.1.1</span> Guidance</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regression of white_pepper on black_pepper</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>m_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(white_pepper <span class="sc">~</span> black_pepper, <span class="fu">as.data.frame</span>(PepperPrice))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -448,14 +496,16 @@ Critical values for test statistics:
 tau1 -2.58 -1.95 -1.62</code></pre>
 </div>
 </div>
+<div style="color:green">
 <p>The null of unit root is rejected. Hence the residuals of model <code>m_1</code> are stationary. This implies a cointegrating relationship between <code>white_pepper</code> and <code>black_pepper</code> prices. Hence, we can use these variables and estimate a regression without the need for differencing.</p>
+</div>
 </section>
 </section>
 <section id="task-2" class="level3" data-number="9.1.2">
-<h3 data-number="9.1.2" class="anchored" data-anchor-id="task-2"><span class="header-section-number">9.1.2</span> Task 2</h3>
+<h3 data-number="9.1.2" data-anchor-id="task-2"><span class="header-section-number">9.1.2</span> Task 2</h3>
 <p>Estimate the Error Correction Mechanism (ECM) between the two types of pepper prices and interpret your results.</p>
-<section id="guidence" class="level4" data-number="9.1.2.1">
-<h4 data-number="9.1.2.1" class="anchored" data-anchor-id="guidence"><span class="header-section-number">9.1.2.1</span> Guidence</h4>
+<section id="guidance-1" class="level4" data-number="9.1.2.1">
+<h4 data-number="9.1.2.1" data-anchor-id="guidance-1"><span class="header-section-number">9.1.2.1</span> Guidance</h4>
 <p>The ECM will be in the form of a first differenced regression of the two variables while also including the lagged error term from the regression we estimated above.</p>
 <p>First, let’s convert the residuals we obtained above to a <code>ts</code> (time-series) object while matching the dates to the <code>PepperPrice</code> object</p>
 <div class="cell">
@@ -504,14 +554,16 @@ Multiple R-squared:  0.2949,    Adjusted R-squared:  0.2896
 F-statistic: 55.83 on 2 and 267 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
+<div style="color:green">
 <p>In the above output, we are interested with the <code>lag_resid</code> term. The coefficient of this term needs to be negative for a valid error correction mechanism. We see that the coefficient is statistically significant and is negative. <code>-0.12866</code> shows that in the case of a deviation from the long-run equilibrium between the white pepper and black pepper prices, 12.9% of this deviation is adjusted in the next period. Here, we have monthly data, so 12.9% of the deviatiton from the long-run equilibrium is adjusted in the next month. The system appears to come back to its equilibrium state in less than a year.</p>
+</div>
 
 
 </section>
 </section>
-</section>
 
-</main> <!-- /main -->
+
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -594,8 +646,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -706,7 +756,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -939,12 +988,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data-visualisation-ggplot2.html" class="pagination-link" aria-label="Introduction to Regression Analysis">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Regression Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
-</div> <!-- /content -->
+ <!-- /content -->
 
 
 
