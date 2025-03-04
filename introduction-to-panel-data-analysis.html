@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -64,17 +64,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./panel-data-fixed-effects-model.html" rel="next">
+<link href="./panel-data-models.html" rel="next">
 <link href="./data-visualisation-ggplot2.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-626149efe8f5d16e1d391ba177679bf0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -281,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Seminar 7</span></a>
+ <span class="menu-text">Seminar 7 (4 March 2025)</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -289,8 +289,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./panel-data-fixed-effects-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Panel Data: Fixed Effects Model</span></span></a>
+  <a href="./panel-data-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Panel Data Models</span></span></a>
   </div>
 </li>
       </ul>
@@ -331,6 +331,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#task-5" id="toc-task-5" class="nav-link" data-scroll-target="#task-5"><span class="header-section-number">11.1.5</span> Task 5</a></li>
   <li><a href="#task-6" id="toc-task-6" class="nav-link" data-scroll-target="#task-6"><span class="header-section-number">11.1.6</span> Task 6</a></li>
   <li><a href="#task-7" id="toc-task-7" class="nav-link" data-scroll-target="#task-7"><span class="header-section-number">11.1.7</span> Task 7</a></li>
+  <li><a href="#task-8" id="toc-task-8" class="nav-link" data-scroll-target="#task-8"><span class="header-section-number">11.1.8</span> Task 8</a></li>
+  <li><a href="#task-9" id="toc-task-9" class="nav-link" data-scroll-target="#task-9"><span class="header-section-number">11.1.9</span> Task 9</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -368,7 +370,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
@@ -397,7 +399,7 @@ The following objects are masked from 'package:base':
 <p>Import the data into R.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Desktop/R-workshops/assets/data/gasoline-demand-IT-DK.csv"</span>, <span class="at">stringsAsFactors=</span><span class="cn">TRUE</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#View(df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For ease of typing, I called this data as <code>df</code>. In the code below, <code>df</code> will refer to the <code>gasoline-demand-IT-DK</code> data we imported.</p>
 </section>
@@ -662,8 +664,79 @@ F-statistic: 478.9 on 2 and 35 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggsave("./plots/panel-data-analysis/italy-denmark-lsdv.png")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="task-8" class="level3" data-number="11.1.8">
+<h3 data-number="11.1.8" class="anchored" data-anchor-id="task-8"><span class="header-section-number">11.1.8</span> Task 8</h3>
+<p>For <code>L_gas_cons_pcar</code> and <code>L_income_pc</code> variables, create deviations from within-group averages.</p>
+<section id="guidance-1" class="level4" data-number="11.1.8.1">
+<h4 data-number="11.1.8.1" class="anchored" data-anchor-id="guidance-1"><span class="header-section-number">11.1.8.1</span> Guidance</h4>
+<p>We can use the <code>dplyr</code> package. We first create within group averages</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(dplyr)</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_L_gas_cons_pcar =</span> <span class="fu">mean</span>(L_gas_cons_pcar, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">m_L_income_pc =</span> <span class="fu">mean</span>(L_income_pc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>View the data to see what we have done above</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#View(df[, c("country", "year", "L_gas_cons_pcar", "m_L_gas_cons_pcar")])</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Create deviations from the mean:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wi_L_gas_cons_pcar =</span> L_gas_cons_pcar <span class="sc">-</span> m_L_gas_cons_pcar,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">wi_L_income_pc =</span> L_income_pc <span class="sc">-</span> m_L_income_pc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Plot deviations from mean</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> wi_L_income_pc, <span class="at">y =</span> wi_L_gas_cons_pcar, <span class="at">color =</span> country)) <span class="sc">+</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="introduction-to-panel-data-analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggsave("./plots/panel-data-analysis/deviations-from-mean.png")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="task-9" class="level3" data-number="11.1.9">
+<h3 data-number="11.1.9" class="anchored" data-anchor-id="task-9"><span class="header-section-number">11.1.9</span> Task 9</h3>
+<p>Run an OLS regression on the deviations from group averages without a constant.</p>
+<section id="guidance-2" class="level4" data-number="11.1.9.1">
+<h4 data-number="11.1.9.1" class="anchored" data-anchor-id="guidance-2"><span class="header-section-number">11.1.9.1</span> Guidance</h4>
+<p>This is called the <em>within-groups estimator</em>. The slope coefficient that we obtain for our explanatory variable will be the same as the one obtained from LSDV approach, with a small difference in standard error estimates.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>wg <span class="ot">&lt;-</span> <span class="fu">lm</span>(wi_L_gas_cons_pcar <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> wi_L_income_pc, <span class="at">data =</span> df)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(wg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = wi_L_gas_cons_pcar ~ 0 + wi_L_income_pc, data = df)
+
+Residuals:
+Logarithm of gasoline consumption per car 
+      Min        1Q    Median        3Q       Max 
+-0.121945 -0.038747 -0.001717  0.035970  0.101286 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+wi_L_income_pc -0.92547    0.04753  -19.47   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.05636 on 37 degrees of freedom
+Multiple R-squared:  0.9111,    Adjusted R-squared:  0.9087 
+F-statistic: 379.1 on 1 and 37 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 
@@ -750,6 +823,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -860,6 +935,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1092,8 +1168,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./panel-data-fixed-effects-model.html" class="pagination-link" aria-label="Panel Data: Fixed Effects Model">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Panel Data: Fixed Effects Model</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./panel-data-models.html" class="pagination-link" aria-label="Panel Data Models">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Panel Data Models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
