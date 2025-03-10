@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9&nbsp; Cointegration: Engle-Granger Test – R-workshops</title>
+<title>13&nbsp; Panel Data Misspecification Tests – R-workshops</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./data-visualisation-ggplot2.html" rel="next">
-<link href="./non-stationarity.html" rel="prev">
+<link href="./endogeneity-iv-estimation.html" rel="next">
+<link href="./panel-data-models.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,35 +103,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -144,7 +115,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./non-stationarity.html">Seminar 5 (18 February 2025)</a></li><li class="breadcrumb-item"><a href="./cointegration.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cointegration: Engle-Granger Test</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./panel-data-models.html">Seminar 7 and 8 (4 and 11 March 2025)</a></li><li class="breadcrumb-item"><a href="./panel-data-misspecification.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Panel Data Misspecification Tests</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -278,7 +249,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cointegration.html" class="sidebar-item-text sidebar-link active">
+  <a href="./cointegration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cointegration: Engle-Granger Test</span></span></a>
   </div>
 </li>
@@ -324,7 +295,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./panel-data-misspecification.html" class="sidebar-item-text sidebar-link">
+  <a href="./panel-data-misspecification.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Panel Data Misspecification Tests</span></span></a>
   </div>
 </li>
@@ -374,10 +345,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#example-pepper-price" id="toc-example-pepper-price" class="nav-link active" data-scroll-target="#example-pepper-price"><span class="header-section-number">9.1</span> Example: Pepper Price</a>
+  <li><a href="#testing-for-autocorrelation" id="toc-testing-for-autocorrelation" class="nav-link active" data-scroll-target="#testing-for-autocorrelation"><span class="header-section-number">13.1</span> Testing for Autocorrelation</a>
   <ul class="collapse">
-  <li><a href="#task-1" id="toc-task-1" class="nav-link" data-scroll-target="#task-1"><span class="header-section-number">9.1.1</span> Task 1</a></li>
-  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2"><span class="header-section-number">9.1.2</span> Task 2</a></li>
+  <li><a href="#task-1" id="toc-task-1" class="nav-link" data-scroll-target="#task-1"><span class="header-section-number">13.1.1</span> Task 1</a></li>
+  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2"><span class="header-section-number">13.1.2</span> Task 2</a></li>
+  <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3"><span class="header-section-number">13.1.3</span> Task 3</a></li>
+  <li><a href="#task-4" id="toc-task-4" class="nav-link" data-scroll-target="#task-4"><span class="header-section-number">13.1.4</span> Task 4</a></li>
+  </ul></li>
+  <li><a href="#heteroscedasticity" id="toc-heteroscedasticity" class="nav-link" data-scroll-target="#heteroscedasticity"><span class="header-section-number">13.2</span> Heteroscedasticity</a>
+  <ul class="collapse">
+  <li><a href="#task-5" id="toc-task-5" class="nav-link" data-scroll-target="#task-5"><span class="header-section-number">13.2.1</span> Task 5</a></li>
+  <li><a href="#task-6" id="toc-task-6" class="nav-link" data-scroll-target="#task-6"><span class="header-section-number">13.2.2</span> Task 6</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">13.2.3</span> </a></li>
   </ul></li>
   </ul>
 </nav>
@@ -385,9 +364,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./non-stationarity.html">Seminar 5 (18 February 2025)</a></li><li class="breadcrumb-item"><a href="./cointegration.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cointegration: Engle-Granger Test</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./panel-data-models.html">Seminar 7 and 8 (4 and 11 March 2025)</a></li><li class="breadcrumb-item"><a href="./panel-data-misspecification.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Panel Data Misspecification Tests</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cointegration: Engle-Granger Test</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Panel Data Misspecification Tests</span></h1>
 </div>
 
 
@@ -404,189 +383,282 @@ window.Quarto = {
 </header>
 
 
+<p>In this section, we will continue with the examples from the previous section and test for Autocorrelation and Heteroscedasticity.</p>
+<p>European Countries Gasoline Consumption data is obtained from Abay Mulatu 316ECN Applied Econometrics lecture material, Coventry University.</p>
+<p>We will be using the all country sample of the gasoline demand data.</p>
+<p>We start by loading the required libraries.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: car</code></pre>
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: carData</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: lmtest</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: zoo</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc) <span class="co"># add labels to variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
-Attaching package: 'zoo'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
+Attaching package: 'Hmisc'
 
-    as.Date, as.Date.numeric</code></pre>
+The following objects are masked from 'package:dplyr':
+
+    src, summarize
+
+The following objects are masked from 'package:base':
+
+    format.pval, units</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(ggplot2)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(dplyr) # for data manipulation</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plm) <span class="co"># to estimate linear panel data models</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: sandwich</code></pre>
+<pre><code>
+Attaching package: 'plm'
+
+The following objects are masked from 'package:dplyr':
+
+    between, lag, lead</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: survival</code></pre>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(fastDummies) # create dummies based on categorical (factor) variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Registered S3 method overwritten by 'quantmod':
-  method            from
-  as.zoo.data.frame zoo </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vars) <span class="co"># to select optimal lag length</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: MASS</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: strucchange</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: urca</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(urca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="example-pepper-price" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="example-pepper-price"><span class="header-section-number">9.1</span> Example: Pepper Price</h2>
-<p>We continue from the previous section, where we concluded that the white and black pepper prices are <span class="math inline">\(I(1)\)</span>.</p>
-<p>In this section, we test whether they have a cointegrating relationship.</p>
-<p>&lt;div style=“color:green&gt;</p>
-<p>There are two conditions for cointegration:</p>
-<ol type="1">
-<li>The time-series should be integrated of the same order</li>
-<li>There is a stationary linear relationship between the variables.</li>
-</ol>
-<p>In the previous section, we established that the series are integrated of the same order. The next task finds out whether they have a stationary linear relationship.</p>
-</section></main></div>
+<section id="testing-for-autocorrelation" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="testing-for-autocorrelation"><span class="header-section-number">13.1</span> Testing for Autocorrelation</h2>
+<section id="task-1" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="task-1"><span class="header-section-number">13.1.1</span> Task 1</h3>
+<p>Using the <code>gasoline-demand-all-countries.csv</code> data, estimate a one-way fixed effects gasoline demand model.</p>
+<section id="guidance" class="level4" data-number="13.1.1.1">
+<h4 data-number="13.1.1.1" class="anchored" data-anchor-id="guidance"><span class="header-section-number">13.1.1.1</span> Guidance</h4>
+<p>This is a replication of what we have done in the previous section.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"PepperPrice"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(PepperPrice) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"black_pepper"</span>, <span class="st">"white_pepper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Desktop/R-workshops/assets/data/gasoline-demand-all-countries.csv"</span>, <span class="at">stringsAsFactors=</span><span class="cn">TRUE</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#View(df)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># label variables</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(df<span class="sc">$</span>L_gas_cons_pcar) <span class="ot">&lt;-</span> <span class="st">"Logarithm of gasoline consumption per car"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(df<span class="sc">$</span>L_income_pc) <span class="ot">&lt;-</span> <span class="st">"Logarithm of real income per capita"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(df<span class="sc">$</span>L_gas_price) <span class="ot">&lt;-</span> <span class="st">"Logarithm of real gasoline price per gallon"</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(df<span class="sc">$</span>L_cars_pc) <span class="ot">&lt;-</span> <span class="st">"Logarithm of number of cars per capita"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="task-1" class="level3" data-number="9.1.1">
-<h3 data-number="9.1.1" data-anchor-id="task-1"><span class="header-section-number">9.1.1</span> Task 1</h3>
-<p>Regress <code>white_pepper</code> on <code>black_pepper</code> and obtain the residuals.</p>
-<section id="guidance" class="level4" data-number="9.1.1.1">
-<h4 data-number="9.1.1.1" data-anchor-id="guidance"><span class="header-section-number">9.1.1.1</span> Guidance</h4>
+<p>We estimate a fixed effects model below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regression of white_pepper on black_pepper</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>m_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(white_pepper <span class="sc">~</span> black_pepper, <span class="fu">as.data.frame</span>(PepperPrice))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain residuals</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>resid_m1 <span class="ot">&lt;-</span> <span class="fu">residuals</span>(m_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We need to perform a unit root test on the residuals. But the test regression should not include a constant term. The <code>adf.test()</code> function we used above does not have an option to remove the constant from test regression. Hence, we revert to <code>urca</code> package.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(urca)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>adf_no_constant <span class="ot">&lt;-</span> <span class="fu">ur.df</span>(resid_m1, <span class="at">type =</span> <span class="st">"none"</span>, <span class="at">lags =</span> <span class="dv">0</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(adf_no_constant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Panel Data Fixed Effects Model</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fixed_1 <span class="ot">&lt;-</span> <span class="fu">plm</span>(L_gas_cons_pcar <span class="sc">~</span> L_income_pc <span class="sc">+</span> L_gas_price <span class="sc">+</span> L_cars_pc, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> df, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>), </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">model =</span> <span class="st">"within"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fixed_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-############################################### 
-# Augmented Dickey-Fuller Test Unit Root Test # 
-############################################### 
-
-Test regression none 
-
+<pre><code>Oneway (individual) effect Within Model
 
 Call:
-lm(formula = z.diff ~ z.lag.1 - 1)
+plm(formula = L_gas_cons_pcar ~ L_income_pc + L_gas_price + L_cars_pc, 
+    data = df, model = "within", index = c("country", "year"))
+
+Balanced Panel: n = 18, T = 19, N = 342
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--1316.48   -79.12    -4.80    74.85  1087.12 
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-0.378774 -0.039758  0.004650  0.045412  0.362856 
 
 Coefficients:
-        Estimate Std. Error t value Pr(&gt;|t|)    
-z.lag.1 -0.11587    0.02916  -3.973 9.11e-05 ***
+             Estimate Std. Error  t-value  Pr(&gt;|t|)    
+L_income_pc  0.662250   0.073386   9.0242 &lt; 2.2e-16 ***
+L_gas_price -0.321702   0.044099  -7.2950 2.355e-12 ***
+L_cars_pc   -0.640483   0.029679 -21.5804 &lt; 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 208.1 on 269 degrees of freedom
-Multiple R-squared:  0.05543,   Adjusted R-squared:  0.05192 
-F-statistic: 15.79 on 1 and 269 DF,  p-value: 9.111e-05
-
-
-Value of test-statistic is: -3.9733 
-
-Critical values for test statistics: 
-      1pct  5pct 10pct
-tau1 -2.58 -1.95 -1.62</code></pre>
+Total Sum of Squares:    17.061
+Residual Sum of Squares: 2.7365
+R-Squared:      0.8396
+Adj. R-Squared: 0.82961
+F-statistic: 560.093 on 3 and 321 DF, p-value: &lt; 2.22e-16</code></pre>
 </div>
-</div>
-<div style="color:green">
-<p>The null of unit root is rejected. Hence the residuals of model <code>m_1</code> are stationary. This implies a cointegrating relationship between <code>white_pepper</code> and <code>black_pepper</code> prices. Hence, we can use these variables and estimate a regression without the need for differencing.</p>
 </div>
 </section>
 </section>
-<section id="task-2" class="level3" data-number="9.1.2">
-<h3 data-number="9.1.2" data-anchor-id="task-2"><span class="header-section-number">9.1.2</span> Task 2</h3>
-<p>Estimate the Error Correction Mechanism (ECM) between the two types of pepper prices and interpret your results.</p>
-<section id="guidance-1" class="level4" data-number="9.1.2.1">
-<h4 data-number="9.1.2.1" data-anchor-id="guidance-1"><span class="header-section-number">9.1.2.1</span> Guidance</h4>
-<p>The ECM will be in the form of a first differenced regression of the two variables while also including the lagged error term from the regression we estimated above.</p>
-<p>First, let’s convert the residuals we obtained above to a <code>ts</code> (time-series) object while matching the dates to the <code>PepperPrice</code> object</p>
+<section id="task-2" class="level3" data-number="13.1.2">
+<h3 data-number="13.1.2" class="anchored" data-anchor-id="task-2"><span class="header-section-number">13.1.2</span> Task 2</h3>
+<p>Test for the existence of Autocorrelation.</p>
+<section id="guidance-1" class="level4" data-number="13.1.2.1">
+<h4 data-number="13.1.2.1" class="anchored" data-anchor-id="guidance-1"><span class="header-section-number">13.1.2.1</span> Guidance</h4>
+<p><strong>Wooldridge Test for AR(1) Errors in FE Panel Models</strong>.</p>
+<p>Could be used for short and long panels. Could be used for fixed effects models only.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert residuals we obtained above to a ts object (match ts object PepperPrice)</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>resid_m1 <span class="ot">&lt;-</span> <span class="fu">ts</span>(resid_m1, <span class="at">start =</span> <span class="fu">start</span>(PepperPrice),</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">frequency =</span> <span class="fu">frequency</span>(PepperPrice))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We then create the difference and lag variables that we need for an Error Correction Mechanism:</p>
-<p><span class="math display">\[
-\Delta white\_pepper_t = \alpha_0 + \alpha_1 \Delta black\_pepper_t + \alpha_2 resid\_m1_{t-1}+\epsilon_t
-\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>d_white <span class="ot">&lt;-</span> <span class="fu">diff</span>(PepperPrice[, <span class="st">"white_pepper"</span>])  <span class="co"># First difference of white_pepper</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>d_black <span class="ot">&lt;-</span> <span class="fu">diff</span>(PepperPrice[, <span class="st">"black_pepper"</span>])  <span class="co"># First difference of black_pepper</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>lag_resid <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">lag</span>(resid_m1, <span class="sc">-</span><span class="dv">1</span>)  <span class="co"># Lagged residuals (one period back)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Each of the above are separate <code>ts</code> objects. we will bind them under one. I will save this as <code>PepperPrice_2</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>PepperPrice_2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(d_white, d_black, lag_resid)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(PepperPrice_2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"d_white"</span>, <span class="st">"d_black"</span>, <span class="st">"lag_resid"</span>) <span class="co"># assign column names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We can now run our ECM:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ecm <span class="ot">&lt;-</span> <span class="fu">lm</span>(d_white <span class="sc">~</span> d_black <span class="sc">+</span> lag_resid, <span class="at">data =</span> <span class="fu">as.data.frame</span>(PepperPrice_2)) </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ecm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pwartest</span>(fixed_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
+    Wooldridge's test for serial correlation in FE panels
+
+data:  fixed_1
+F = 212, df1 = 1, df2 = 322, p-value &lt; 2.2e-16
+alternative hypothesis: serial correlation</code></pre>
+</div>
+</div>
+<p>According to the test results, there is autocorrelation of order 1.</p>
+<p><strong>Breusch-Godfrey Test for Panel Models</strong></p>
+<p>Suitable for long panels, allows to choose the order to test for. It could be used for both the fixed effects and random effects models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbgtest</span>(fixed_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Breusch-Godfrey/Wooldridge test for serial correlation in panel models
+
+data:  L_gas_cons_pcar ~ L_income_pc + L_gas_price + L_cars_pc
+chisq = 185.08, df = 19, p-value &lt; 2.2e-16
+alternative hypothesis: serial correlation in idiosyncratic errors</code></pre>
+</div>
+</div>
+<p>There is autocorrelation of order 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbgtest</span>(fixed_1, <span class="at">order =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Breusch-Godfrey/Wooldridge test for serial correlation in panel models
+
+data:  L_gas_cons_pcar ~ L_income_pc + L_gas_price + L_cars_pc
+chisq = 172.76, df = 3, p-value &lt; 2.2e-16
+alternative hypothesis: serial correlation in idiosyncratic errors</code></pre>
+</div>
+</div>
+<p>There is autocorrelation up to order 3.</p>
+</section>
+</section>
+<section id="task-3" class="level3" data-number="13.1.3">
+<h3 data-number="13.1.3" class="anchored" data-anchor-id="task-3"><span class="header-section-number">13.1.3</span> Task 3</h3>
+<p>Estimate a random effects model</p>
+<section id="guidance-2" class="level4" data-number="13.1.3.1">
+<h4 data-number="13.1.3.1" class="anchored" data-anchor-id="guidance-2"><span class="header-section-number">13.1.3.1</span> Guidance</h4>
+<p>We have this in the previous section. Here is a random effects version of the above fixed effects model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Panel Data Fixed Effects Model</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>random_1 <span class="ot">&lt;-</span> <span class="fu">plm</span>(L_gas_cons_pcar <span class="sc">~</span> L_income_pc <span class="sc">+</span> L_gas_price <span class="sc">+</span> L_cars_pc, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> df, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>), </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">model =</span> <span class="st">"random"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(random_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Oneway (individual) effect Random Effect Model 
+   (Swamy-Arora's transformation)
+
 Call:
-lm(formula = d_white ~ d_black + lag_resid, data = as.data.frame(PepperPrice_2))
+plm(formula = L_gas_cons_pcar ~ L_income_pc + L_gas_price + L_cars_pc, 
+    data = df, model = "random", index = c("country", "year"))
+
+Balanced Panel: n = 18, T = 19, N = 342
+
+Effects:
+                   var  std.dev share
+idiosyncratic 0.008525 0.092330 0.182
+individual    0.038238 0.195545 0.818
+theta: 0.8923
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--1059.66   -62.79   -15.21    61.56  1092.60 
+      Min.    1st Qu.     Median    3rd Qu.       Max. 
+-0.3977058 -0.0520350  0.0050877  0.0582288  0.3763726 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  4.60426   11.65811   0.395    0.693    
-d_black      0.72575    0.07993   9.080  &lt; 2e-16 ***
-lag_resid   -0.12866    0.02689  -4.784 2.84e-06 ***
+             Estimate Std. Error  z-value  Pr(&gt;|z|)    
+(Intercept)  1.996698   0.184326  10.8324 &lt; 2.2e-16 ***
+L_income_pc  0.554986   0.059128   9.3861 &lt; 2.2e-16 ***
+L_gas_price -0.420389   0.039978 -10.5155 &lt; 2.2e-16 ***
+L_cars_pc   -0.606840   0.025515 -23.7836 &lt; 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 191.5 on 267 degrees of freedom
-  (1 observation deleted due to missingness)
-Multiple R-squared:  0.2949,    Adjusted R-squared:  0.2896 
-F-statistic: 55.83 on 2 and 267 DF,  p-value: &lt; 2.2e-16</code></pre>
+Total Sum of Squares:    18.054
+Residual Sum of Squares: 3.0817
+R-Squared:      0.82931
+Adj. R-Squared: 0.8278
+Chisq: 1642.2 on 3 DF, p-value: &lt; 2.22e-16</code></pre>
 </div>
 </div>
-<div style="color:green">
-<p>In the above output, we are interested with the <code>lag_resid</code> term. The coefficient of this term needs to be negative for a valid error correction mechanism. We see that the coefficient is statistically significant and is negative. <code>-0.12866</code> shows that in the case of a deviation from the long-run equilibrium between the white pepper and black pepper prices, 12.9% of this deviation is adjusted in the next period. Here, we have monthly data, so 12.9% of the deviatiton from the long-run equilibrium is adjusted in the next month. The system appears to come back to its equilibrium state in less than a year.</p>
+</section>
+</section>
+<section id="task-4" class="level3" data-number="13.1.4">
+<h3 data-number="13.1.4" class="anchored" data-anchor-id="task-4"><span class="header-section-number">13.1.4</span> Task 4</h3>
+<p>Test for autocorrelation in the above estimated random effects model.</p>
+<section id="guidance-3" class="level4" data-number="13.1.4.1">
+<h4 data-number="13.1.4.1" class="anchored" data-anchor-id="guidance-3"><span class="header-section-number">13.1.4.1</span> Guidance</h4>
+<p>We can start by applying the Breusch-Godfrey test for panel models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbgtest</span>(random_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Breusch-Godfrey/Wooldridge test for serial correlation in panel models
+
+data:  L_gas_cons_pcar ~ L_income_pc + L_gas_price + L_cars_pc
+chisq = 193.42, df = 19, p-value &lt; 2.2e-16
+alternative hypothesis: serial correlation in idiosyncratic errors</code></pre>
 </div>
+</div>
+<p>There is autocorrelation of order 1.</p>
+<p><strong>Baltagi and Li Serial Dependence Test for Random Effect Models</strong></p>
+<p>The test can be used with random effects models only.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbltest</span>(random_1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Baltagi and Li two-sided LM test
+
+data:  formula(x$formula)
+chisq = 225.16, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: AR(1)/MA(1) errors in RE panel model</code></pre>
+</div>
+</div>
+<p>This test confirms the results of the previous one, in that, there is autocorrelation of order 1.</p>
+</section>
+</section>
+</section>
+<section id="heteroscedasticity" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="heteroscedasticity"><span class="header-section-number">13.2</span> Heteroscedasticity</h2>
+<section id="task-5" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="task-5"><span class="header-section-number">13.2.1</span> Task 5</h3>
+<p>Test for the existence of heteroscedasticity in each of the models estimated above.</p>
+<section id="guidance-4" class="level4" data-number="13.2.1.1">
+<h4 data-number="13.2.1.1" class="anchored" data-anchor-id="guidance-4"><span class="header-section-number">13.2.1.1</span> Guidance</h4>
+<p><strong>Lagrange FF Multiplier Tests for Panel Data</strong></p>
+<p>We will apply <code>plmtest()</code> with <code>type = "bp"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plmtest</span>(fixed_1, <span class="at">type =</span> <span class="st">"bp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lagrange Multiplier Test - (Breusch-Pagan)
+
+data:  L_gas_cons_pcar ~ L_income_pc + L_gas_price + L_cars_pc
+chisq = 1465.6, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: significant effects</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plmtest</span>(random_1, <span class="at">type =</span> <span class="st">"bp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lagrange Multiplier Test - (Breusch-Pagan)
+
+data:  L_gas_cons_pcar ~ L_income_pc + L_gas_price + L_cars_pc
+chisq = 1465.6, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: significant effects</code></pre>
+</div>
+</div>
+<p>There is heteroscedasticity.</p>
+</section>
+</section>
+<section id="task-6" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="task-6"><span class="header-section-number">13.2.2</span> Task 6</h3>
+<p>Re-estimate the models with autocorrelation and heteroscedasticity robust standard errors.</p>
+</section>
+<section id="section" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3" class="anchored" data-anchor-id="section"><span class="header-section-number">13.2.3</span> </h3>
 
 
 </section>
 </section>
 
-
- <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1009,17 +1081,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./non-stationarity.html" class="pagination-link" aria-label="Unit Root (Non-stationary Time Series): Augmented Dickerm(y-Fuller Test">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Unit Root (Non-stationary Time Series): Augmented Dickerm(y-Fuller Test</span></span>
+      <a href="./panel-data-models.html" class="pagination-link" aria-label="Panel Data Models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Panel Data Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data-visualisation-ggplot2.html" class="pagination-link" aria-label="Data Visualisation Using `ggplot2`">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Visualisation Using <code>ggplot2</code></span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./endogeneity-iv-estimation.html" class="pagination-link" aria-label="Endogeneity and Instrumental Variable Estimation">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Endogeneity and Instrumental Variable Estimation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
- <!-- /content -->
+</div> <!-- /content -->
 
 
 
