@@ -333,7 +333,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">Seminar 9 (18 March 2025)</span></a>
+ <span class="menu-text">Seminar 9 ans 10 (18 and 25 March 2025)</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -979,6 +979,17 @@ data:  L_gas_cons_pcar ~ L_income_pc + L_gas_price + L_cars_pc + factor(year)
 chisq = 134.07, df = 3, p-value &lt; 2.2e-16
 alternative hypothesis: one model is inconsistent</code></pre>
 </div>
+</div>
+<p>We reject the null hypothesis of random effects and choose the fixed effects model.</p>
+<div style="color: green">
+<p>To sum up, we started by estimating a Pooled OLS model, followed by a fixed effects specification. We have seen alternative ways of estimating the Fixed Effects Model, i.e.&nbsp;the Least Squares Dummy Variable Apporoach, the Within Groups Estimator and R’s built in function <code>plm</code> with the argument <code>model = "within"</code>.</p>
+<p>We then moved on to Random Effects Model using the <code>plm</code> function with the argument <code>model = "random"</code>.</p>
+<p>The F-test comparison between the Pooled OLS and Fixed Effects Model indicated the existence of unobserved heterogeneity (time invariant country-specific effects).</p>
+<p>The Breusch-Pagan Test was applied to compare the Pooled and Random Effects models. This test also rejected the Pooled OLS and indicated that the variation of the country-specific effects is different than zero.</p>
+<p>A comparison between the Fixed Effects and Random Effects model through the Hausman Test rejected the null of Random Effects specification in favour of a Fixed Effects Model.</p>
+<p>We then moved on to check existence of time-specific effects that are common to all cross-sectional units. This was done by an F-test, which this time, compared one-way and two way fixed effects specification and tested for the joint significance of the time effects.</p>
+<p>The null of time effects being jointly equal to zero is rejected, suggesting estimation of two-way models.</p>
+<p>A final comparison was between the Two-way Fixed Effects and Two-way Random effects models. The Hausman Test again rejected the Random Effects specification, which led us to decide on the Two-way Fixed Effects model as our final specification.</p>
 </div>
 
 
