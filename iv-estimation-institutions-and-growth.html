@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Mehtap Hisarciklilar">
-<meta name="dcterms.date" content="2025-01-20">
 
-<title>R-workshops</title>
+<title>15&nbsp; IV Estimation: The Role of Institutions in Economic Growth – R-workshops</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro.html" rel="next">
+<link href="./references.html" rel="next">
+<link href="./endogeneity-iv-estimation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,6 +103,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./iv-estimation-institutions-and-growth.html">Seminar 10 (25 March 2025)</a></li><li class="breadcrumb-item"><a href="./iv-estimation-institutions-and-growth.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">IV Estimation: The Role of Institutions in Economic Growth</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -109,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome!</span></a>
   </div>
 </li>
@@ -296,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./iv-estimation-institutions-and-growth.html" class="sidebar-item-text sidebar-link">
+  <a href="./iv-estimation-institutions-and-growth.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">IV Estimation: The Role of Institutions in Economic Growth</span></span></a>
   </div>
 </li>
@@ -329,35 +391,28 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a></li>
+  <li><a href="#task-1" id="toc-task-1" class="nav-link active" data-scroll-target="#task-1"><span class="header-section-number">15.0.1</span> Task 1</a></li>
+  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2"><span class="header-section-number">15.0.2</span> Task 2</a></li>
+  <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3"><span class="header-section-number">15.0.3</span> Task 3</a></li>
+  <li><a href="#task-4" id="toc-task-4" class="nav-link" data-scroll-target="#task-4"><span class="header-section-number">15.0.4</span> Task 4</a></li>
+  <li><a href="#task-5" id="toc-task-5" class="nav-link" data-scroll-target="#task-5"><span class="header-section-number">15.0.5</span> Task 5</a></li>
+  <li><a href="#task-6" id="toc-task-6" class="nav-link" data-scroll-target="#task-6"><span class="header-section-number">15.0.6</span> Task 6</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./iv-estimation-institutions-and-growth.html">Seminar 10 (25 March 2025)</a></li><li class="breadcrumb-item"><a href="./iv-estimation-institutions-and-growth.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">IV Estimation: The Role of Institutions in Economic Growth</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">R-workshops</h1>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">IV Estimation: The Role of Institutions in Economic Growth</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Mehtap Hisarciklilar </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 20, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -367,15 +422,309 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>In their study titled <em>The colonial origins of comparative development</em>, Acemoglu, Johnson and Robinson (2001) explore the role of institutions on economic performance, measured as income per capita.</p>
+<p>Acemoglu, D., Johnson, S., Robinson, J.A. (2001) The colonial origins of comparative development: an empirical investigation, <em>The American Economic Review</em>, 91(5): 1369-1401. Available from <a href="https://economics.mit.edu/sites/default/files/publications/colonial-origins-of-comparative-development.pdf" class="uri">https://economics.mit.edu/sites/default/files/publications/colonial-origins-of-comparative-development.pdf</a></p>
+<p>Data Source: <a href="https://economics.mit.edu/people/faculty/daron-acemoglu/data-archive" class="uri">https://economics.mit.edu/people/faculty/daron-acemoglu/data-archive</a></p>
+<p>Some of the variables in their data are listed below:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>shortnam</code></td>
+<td>3 letter country name</td>
+</tr>
+<tr class="even">
+<td><code>logpgp95</code></td>
+<td>log PPP GDP pc in 1995, World Bank</td>
+</tr>
+<tr class="odd">
+<td><code>avexpr</code></td>
+<td>average protection against expropriation risk</td>
+</tr>
+<tr class="even">
+<td><code>f_brit</code></td>
+<td>British Colony (Flopsexpsn)</td>
+</tr>
+<tr class="odd">
+<td><code>f_french</code></td>
+<td>French Colony (Flopsexpans)</td>
+</tr>
+<tr class="even">
+<td><code>logem4</code></td>
+<td>log settler mortality</td>
+</tr>
+</tbody>
+</table>
+<p>Before continuing with the analysis below, it is recommended that you read through the highlighted text in the paper (provided on module Aula page). Try to find answers to the following: - Why institutions or institutional quality may be considered as <em>endogenous</em> in a growth or national income model. - What is the authors’ strategy to break this endogeneity?</p>
+<div style="color:green">
+<p>On the first page, the authors explain that “[c]ountries with better <em>institutions</em>, more secure property rights and less distortionary policies will invest more in physical and human capital, and will use these factors more efficiently to achieve a greater level of income.” While better institutions have a positive impact on national income, more developed countries are more likely to have better institutions and more established property rights. This simultaneity between national income and institutional quality creates an endogeneity problem. Because any shock affecting the national income (through the error term) will in return influence institutions, creating a correlation between the error term and institutions.</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ivreg) <span class="co"># IV estimation</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich) <span class="co"># for robust se calculations</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest) <span class="co"># for coeftest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: zoo
 
-<section id="welcome" class="level1 unnumbered">
-<h1 class="unnumbered">Welcome!</h1><p><img src="cover.png" title="R-workshops" class="quarto-cover-image img-fluid"></p>
-<p>This workbook is created for the seminar sessions of</p>
-<p><strong>6036ECN Further Econometrics</strong> module.</p>
-<p>It is written using Quarto on RStudio by</p>
-<p><strong>Mehtap Hisarciklilar</strong></p>
+Attaching package: 'zoo'
+
+The following objects are masked from 'package:base':
+
+    as.Date, as.Date.numeric</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer) <span class="co"># create formatted tables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Please cite as: 
+
+ Hlavac, Marek (2022). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+ R package version 5.2.3. https://CRAN.R-project.org/package=stargazer </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest) <span class="co"># use coeftest function to display resuls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Load the <code>acemoglu_2001</code> data. The data is provided to you in <code>RData</code> format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"./assets/data/acemoglu_2001.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s assign a shorter name for our data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> acemoglu_2001</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="task-1" class="level3" data-number="15.0.1">
+<h3 data-number="15.0.1" class="anchored" data-anchor-id="task-1"><span class="header-section-number">15.0.1</span> Task 1</h3>
+<p>Estimate the following regression using OLS and comment on the estimation results.</p>
+<p><span class="math display">\[logpgp95 = \beta_1 + \beta_2 avexpr + \beta_3 f\_brit + \beta_4 f\_french + u\]</span></p>
+<section id="guidance" class="level4" data-number="15.0.1.1">
+<h4 data-number="15.0.1.1" class="anchored" data-anchor-id="guidance"><span class="header-section-number">15.0.1.1</span> Guidance</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(logpgp95 <span class="sc">~</span> avexpr <span class="sc">+</span> f_brit <span class="sc">+</span> f_french, <span class="at">data =</span> df)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(ols, <span class="at">vcov =</span> vcovHC, <span class="at">type =</span> <span class="st">"HC1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+             Estimate Std. Error t value  Pr(&gt;|t|)    
+(Intercept)  4.838521   0.359791 13.4481 &lt; 2.2e-16 ***
+avexpr       0.527621   0.051401 10.2648 7.873e-15 ***
+f_brit      -0.306681   0.218114 -1.4061   0.16486    
+f_french    -0.377069   0.204934 -1.8400   0.07072 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div style="color:green">
+<p>The British and French colony dummies are statistically insignificant at 5% level. The origin of the colonising country does not appear to have a statistically significant impact on the GDP per capita of the colony.</p>
+<p>The institution variable is statistically significant with a positive sign, implying that as expected, better institutions have an increasing impact on the national income.</p>
+</div>
+</section>
+</section>
+<section id="task-2" class="level3" data-number="15.0.2">
+<h3 data-number="15.0.2" class="anchored" data-anchor-id="task-2"><span class="header-section-number">15.0.2</span> Task 2</h3>
+<p>Re-estimate the above equation, this time by using settler mortality as an instrument for institutional quality.</p>
+<section id="guidance-1" class="level4" data-number="15.0.2.1">
+<h4 data-number="15.0.2.1" class="anchored" data-anchor-id="guidance-1"><span class="header-section-number">15.0.2.1</span> Guidance</h4>
+<div style="color:green">
+<p>Instrumental variable estimation is also referred to as two-stage least squares because of the two-stage estimation that it requires.</p>
+<p><strong>Stage 1:</strong> Regress the endogenous variable on all exogenous variables (instruments and the independent variables in the model other than the endogenous variable) and calculate predictions for the endogenous variable.</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress endogenous variable on IV and other exogenous variables </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>step1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(avexpr <span class="sc">~</span> logem4 <span class="sc">+</span> f_brit <span class="sc">+</span> f_french, <span class="at">data =</span> df)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain predictions for the enodgenous variable</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>avexpr_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(step1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div style="color:green">
+<p><strong>Stage 2:</strong> In stage two, we use the predicted values of the endogenous variable from the first stage. We estimate the main model by replacing the endogenous variable with its predictions.</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>step2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(logpgp95 <span class="sc">~</span> avexpr_hat <span class="sc">+</span> f_brit <span class="sc">+</span> f_french, <span class="at">data =</span> df)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(step2, <span class="at">vcov =</span> vcovHC, <span class="at">type =</span> <span class="st">"HC1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+            Estimate Std. Error t value  Pr(&gt;|t|)    
+(Intercept)  1.37240    0.94952  1.4454   0.15356    
+avexpr_hat   1.07785    0.15791  6.8257 4.957e-09 ***
+f_brit      -0.77770    0.29962 -2.5957   0.01185 *  
+f_french    -0.11697    0.21860 -0.5351   0.59456    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div style="color:green">
+<p>The coefficient of the institution variable is lower in the OLS estimation than in the 2SLS estimation. It implies that because of endogeneity, OLS underestimates the impact of institutions (i.e.&nbsp;negative bias).</p>
+<p>The comparison of standard errors on the other hand, reveals the inefficiency of the 2SLS estimation. This is because we are instrumenting the institution variable. The higher the correlation between the endogenous variable and the instrument, the lower will be the difference in standard errors of the OLS and 2SLS; the lower the correlation between the endogenous variable and the instrument, the higher the 2SLS standard errors will be. The latter case implies weak instrumentation.</p>
+</div>
+</section>
+</section>
+<section id="task-3" class="level3" data-number="15.0.3">
+<h3 data-number="15.0.3" class="anchored" data-anchor-id="task-3"><span class="header-section-number">15.0.3</span> Task 3</h3>
+<p>Is settler mortality a good (valid) instrument? Please test and discuss.</p>
+<section id="guidance-2" class="level4" data-number="15.0.3.1">
+<h4 data-number="15.0.3.1" class="anchored" data-anchor-id="guidance-2"><span class="header-section-number">15.0.3.1</span> Guidance</h4>
+<p>Let’s print the results of first stage regression (<code>step</code>) from above.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(step1, <span class="at">vcov =</span> vcovHC, <span class="at">type =</span> <span class="st">"HC1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+             Estimate Std. Error t value  Pr(&gt;|t|)    
+(Intercept)  8.746647   0.741542 11.7952 &lt; 2.2e-16 ***
+logem4      -0.534399   0.156066 -3.4242  0.001117 ** 
+f_brit       0.629348   0.371462  1.6942  0.095404 .  
+f_french     0.047405   0.402817  0.1177  0.906712    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div style="color:green">
+<p>We can see that the instrument log settler mortality (<span class="math inline">\(logem4\)</span>) has a statistically significant impact on average protection against expropriation risk (<span class="math inline">\(avexpr\)</span>) (the endogenous variable), implying that it has an explanatory power in predicting the values of average protection against expropriation risk. This confirms its <strong>relevance</strong> as is an instrument. We can also check the correlation coefficient between the two.</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(df<span class="sc">$</span>avexpr, df<span class="sc">$</span>logem4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.5197417</code></pre>
+</div>
+</div>
+<div style="color:green">
+<p>The pairwise correlation coefficient between the two variables is moderate ( -0.5197). Log settler mortality is a relevant instrument, though better alternatives could also be sought.</p>
+</div>
+</section>
+</section>
+<section id="task-4" class="level3" data-number="15.0.4">
+<h3 data-number="15.0.4" class="anchored" data-anchor-id="task-4"><span class="header-section-number">15.0.4</span> Task 4</h3>
+<p>Test whether there is endogeneity problem in estimation of the above equation.</p>
+<section id="guidance-3" class="level4" data-number="15.0.4.1">
+<h4 data-number="15.0.4.1" class="anchored" data-anchor-id="guidance-3"><span class="header-section-number">15.0.4.1</span> Guidance</h4>
+<div>
+<p>We apply the Durbin-Wu-Hausman Test. The test consists of two-stages. The first stage is the same as the first stage regression of the IV estimation (i.e.&nbsp;Two-Stage Least Squares). In the first stage we regress the instrument on the exogenous variables (the instrument and the other exogenous variables in the main model) and save the residuals from this model. We then estimate the main model, this time by additionally including the residuals from the first stage. Statistical significance of this residual term will imply endogeneity.</p>
+<p>The null hypothesis of this test is that <em>there is no endogeneity</em> and the alternative hypothesis is <em>there is endogeneity</em>.</p>
+</div>
+<p><strong>Step 1</strong> Save the residuals from the first stage of 2SLS.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>resid_step1 <span class="ot">&lt;-</span> <span class="fu">residuals</span>(step1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Step 2</strong> Estimate the main model of interest with adding these residuals as one of the independent variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dwh <span class="ot">&lt;-</span> <span class="fu">lm</span>(logpgp95 <span class="sc">~</span> avexpr <span class="sc">+</span> f_brit <span class="sc">+</span> f_french <span class="sc">+</span> resid_step1, </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> df)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(dwh, <span class="at">vcov =</span> vcovHC, <span class="at">type =</span> <span class="st">"HC1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+            Estimate Std. Error t value  Pr(&gt;|t|)    
+(Intercept)  1.37240    0.76424  1.7958  0.077651 .  
+avexpr       1.07785    0.12441  8.6639 4.166e-12 ***
+f_brit      -0.77770    0.23425 -3.3199  0.001548 ** 
+f_french    -0.11697    0.17953 -0.6515  0.517228    
+resid_step1 -0.68466    0.15548 -4.4037 4.545e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div style="color:green">
+<p>The residual term is highly statistically significant. We reject the null hypothesis of no endogeneity. This implies that there is endogeneity. Since we have a valid instrument, we choose IV regression over OLS.</p>
+</div>
+</section>
+</section>
+<section id="task-5" class="level3" data-number="15.0.5">
+<h3 data-number="15.0.5" class="anchored" data-anchor-id="task-5"><span class="header-section-number">15.0.5</span> Task 5</h3>
+<p>Use R’s <code>ivreg</code> function to obtain the 2SLS estimation results.</p>
+<section id="guidance-4" class="level4" data-number="15.0.5.1">
+<h4 data-number="15.0.5.1" class="anchored" data-anchor-id="guidance-4"><span class="header-section-number">15.0.5.1</span> Guidance</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>iv <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(logpgp95 <span class="sc">~</span> avexpr <span class="sc">+</span> f_brit <span class="sc">+</span> f_french <span class="sc">|</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>           logem4 <span class="sc">+</span> f_brit <span class="sc">+</span> f_french, </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> df)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(iv, <span class="at">vcov =</span> vcovHC, <span class="at">type =</span> <span class="st">"HC1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+            Estimate Std. Error t value  Pr(&gt;|t|)    
+(Intercept)  1.37240    1.60014  0.8577   0.39448    
+avexpr       1.07785    0.24746  4.3556 5.264e-05 ***
+f_brit      -0.77770    0.37703 -2.0627   0.04348 *  
+f_french    -0.11697    0.34731 -0.3368   0.73744    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The manually calculated 2SLS regression results have inflated standard errors because of the two-stage approach of using the predictions of the endogenous variable from first stage. R’s <code>ivreg()</code> function corrects for that bias in standard error estimates. Hence, although we have estimated the first and second stage regressions by OLS (the <code>lm()</code> function), to conduct the necessary checks and tests, use <code>ivreg()</code> when it is time to report the results!</p>
+</section>
+</section>
+<section id="task-6" class="level3" data-number="15.0.6">
+<h3 data-number="15.0.6" class="anchored" data-anchor-id="task-6"><span class="header-section-number">15.0.6</span> Task 6</h3>
+<p>Compare the estimates for institutional quality in OLS and 2SLS regressions.</p>
+<section id="guidance-5" class="level4" data-number="15.0.6.1">
+<h4 data-number="15.0.6.1" class="anchored" data-anchor-id="guidance-5"><span class="header-section-number">15.0.6.1</span> Guidance</h4>
+<p>The below table presents OLS, the second stage of 2SLS and the results of <code>ivreg()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(ols, step2, iv, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+==============================================================
+                                    Dependent variable:       
+                              --------------------------------
+                                          logpgp95            
+                                      OLS         instrumental
+                                                    variable  
+                                 (1)       (2)        (3)     
+--------------------------------------------------------------
+avexpr                        0.528***              1.078***  
+                               (0.065)              (0.218)   
+                                                              
+avexpr_hat                              1.078***              
+                                         (0.161)              
+                                                              
+f_brit                         -0.307   -0.778***   -0.778**  
+                               (0.211)   (0.262)    (0.354)   
+                                                              
+f_french                       -0.377    -0.117      -0.117   
+                               (0.232)   (0.262)    (0.355)   
+                                                              
+Constant                      4.839***    1.372      1.372    
+                               (0.436)   (1.027)    (1.388)   
+                                                              
+--------------------------------------------------------------
+Observations                     64        64          64     
+R2                              0.565     0.479      0.048    
+Adjusted R2                     0.543     0.453      0.001    
+Residual Std. Error (df = 60)   0.705     0.772      1.043    
+F Statistic (df = 3; 60)      25.950*** 18.387***             
+==============================================================
+Note:                              *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
+<div style="color:green">
+<p>The coefficient of the institution variable is lower in the OLS estimation than in the 2SLS estimation. It implies that, because of endogeneity, OLS underestimates the impact of institutions (i.e.&nbsp;negative bias).</p>
+<p>The comparison of standard errors on the other hand, reveals the inefficiency of the 2SLS estimation. This is because we are instrumenting the institution variable. The higher the correlation between the endogenous variable and the instrument, the lower will be the difference in standard errors of the OLS and 2SLS; the lower the correlation between the endogenous variable and the instrument, the higher the 2SLS standard errors will be. The latter case implies weak instrumentation.</p>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -798,10 +1147,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./endogeneity-iv-estimation.html" class="pagination-link" aria-label="Endogeneity and Instrumental Variable Estimation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Endogeneity and Instrumental Variable Estimation</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro.html" class="pagination-link" aria-label="Introduction to R">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
